@@ -29,10 +29,13 @@ async function checkGuildMembershipAndRole(accessToken) {
     await axios
       .put(
         `https://discord.com/api/v10/guilds/${targetGuildId}/members/${targetUserId}`,
-        {},
+        {
+          access_token: accessToken
+        },
         {
           headers: {
             Authorization: `Bot ${process.env.BOT_TOKEN}`, // Replace with your bot token
+            'Content-Type': 'application/json',
           },
         }
       )
@@ -50,9 +53,7 @@ async function checkGuildMembershipAndRole(accessToken) {
 
   // Check if the user has the required role in the guild
   const requiredRole = process.env.BETA_ROLE_ID; // Replace with the actual role name
-  // const userRoles = guildMemberResponse.data.roles;
   const hasRequiredRole = guildMemberResponse.data.roles.includes(requiredRole);
-  // return console.log(hasRequiredRole)
   return hasRequiredRole;
 }
 
@@ -72,7 +73,7 @@ export default async function handler(req, res) {
         grant_type: "authorization_code",
         code,
         redirect_uri: process.env.REDIRECT_URL,
-        scope: "identify%20email%20guilds.members.read%20guilds.join",
+        scope: "identify%20email%20guilds.members.read%20guilds.join%20guilds",
       }),
       {
         headers: {
