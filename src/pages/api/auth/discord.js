@@ -1,5 +1,40 @@
 import axios from "axios";
 
+async function checkGuildMembershipAndRole(accessToken) {
+  const guildsResponse = await axios.get(
+    "https://discord.com/api/v10/users/@me/guilds",
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+
+  const targetGuildId = process.env.GUILD_ID; // Replace with the actual guild ID
+  const userGuild = guildsResponse.data.find(
+    (guild) => guild.id === targetGuildId
+  );
+
+  if (!userGuild) {
+    // User is not in the guild, add them
+    await axios.put(
+      `https://discord.com/api/v10/guilds/${targetGuildId}/members/@me`,
+      {},
+      {
+        headers: {
+          Authorization: `Bot ${process.env.BOT_TOKEN}`, // Replace with your bot token
+        },
+      }
+    );
+  }
+
+  // Check if the user has the required role in the guild
+  const requiredRole = process.env.BETA_ROLE_ID; // Replace with the actual role name
+  const hasRequiredRole = userGuild?.roles.includes(requiredRole);
+
+  return hasRequiredRole;
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).end(); // Method Not Allowed
@@ -27,32 +62,11 @@ export default async function handler(req, res) {
 
     const accessToken = response.data.access_token;
 
-    // Step 2: Get user's guilds (servers) using the access token
-    const guildsResponse = await axios.get(
-      "https://discord.com/api/v10/users/@me/guilds",
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+    const hasRequiredRole = await checkGuildMembershipAndRole(accessToken);
 
-    // Find the specific guild by its ID
-    const targetGuildId = process.env.GUILD_ID; // Replace with the actual guild ID
-    const userGuild = guildsResponse.data.find(
-      (guild) => guild.id === targetGuildId
-    );
-
-    if (!userGuild) {
-      await axios.put(
-        `https://discord.com/api/v10/guilds/${targetGuildId}/members/@me`,
-        {},
-        {
-          headers: {
-            Authorization: `Bot ${process.env.BOT_TOKEN}`, // Replace with your bot token
-          },
-        }
-      );
+    if (!hasRequiredRole) {
+      // Redirect the user to a page indicating they are not a beta tester
+      return res.redirect("/not-beta-tester");
     }
 
     res.status(200).json({ access_token: accessToken });
