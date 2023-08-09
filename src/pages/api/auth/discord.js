@@ -1,6 +1,14 @@
 import axios from "axios";
 
 async function checkGuildMembershipAndRole(accessToken) {
+  const usersResponse = await axios.get(
+    "https://discord.com/api/v10/users/@me",
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
   const guildsResponse = await axios.get(
     "https://discord.com/api/v10/users/@me/guilds",
     {
@@ -10,6 +18,7 @@ async function checkGuildMembershipAndRole(accessToken) {
     }
   );
 
+  const targetUserId = usersResponse.data.id;
   const targetGuildId = process.env.GUILD_ID; // Replace with the actual guild ID
   const userGuild = guildsResponse.data.find(
     (guild) => guild.id === targetGuildId
@@ -17,20 +26,21 @@ async function checkGuildMembershipAndRole(accessToken) {
 
   if (!userGuild) {
     // User is not in the guild, add them
-    await axios.put(
-      `https://discord.com/api/v10/guilds/${targetGuildId}/members/@me`,
-      {},
-      {
-        headers: {
-          Authorization: `Bot ${process.env.BOT_TOKEN}`, // Replace with your bot token
-        },
-      }
-    );
+    await axios
+      .put(
+        `https://discord.com/api/v10/guilds/${targetGuildId}/members/${targetUserId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bot ${process.env.BOT_TOKEN}`, // Replace with your bot token
+          },
+        }
+      )
   }
 
   // Fetch the user's roles in the guild
   const guildMemberResponse = await axios.get(
-    `https://discord.com/api/v10/guilds/${targetGuildId}/members/@me`,
+    `https://discord.com/api/v10/users/@me/guilds/${targetGuildId}/member`,
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -40,9 +50,9 @@ async function checkGuildMembershipAndRole(accessToken) {
 
   // Check if the user has the required role in the guild
   const requiredRole = process.env.BETA_ROLE_ID; // Replace with the actual role name
-  const userRoles = guildMemberResponse.data.roles;
-  const hasRequiredRole = userRoles.includes(requiredRole);
-
+  // const userRoles = guildMemberResponse.data.roles;
+  const hasRequiredRole = guildMemberResponse.data.roles.includes(requiredRole);
+  // return console.log(hasRequiredRole)
   return hasRequiredRole;
 }
 
@@ -62,7 +72,7 @@ export default async function handler(req, res) {
         grant_type: "authorization_code",
         code,
         redirect_uri: process.env.REDIRECT_URL,
-        scope: "identify%20email",
+        scope: "identify%20email%20guilds.members.read%20guilds.join",
       }),
       {
         headers: {
@@ -70,17 +80,14 @@ export default async function handler(req, res) {
         },
       }
     );
-
     const accessToken = response.data.access_token;
 
     const hasRequiredRole = await checkGuildMembershipAndRole(accessToken);
-
     if (!hasRequiredRole) {
-      // Redirect the user to a page indicating they are not a beta tester
-      return res.redirect("/not-beta-tester");
+      res.status(200).json({ beta_access: false });
+    } else {
+      res.status(200).json({ beta_access: true, access_token: accessToken });
     }
-
-    res.status(200).json({ access_token: accessToken });
   } catch (error) {
     console.error("Authentication error", error);
     res.status(500).json({ error: "An error occurred during authentication." });

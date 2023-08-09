@@ -18,7 +18,7 @@ const DashboardButton = () => {
   
       if (!accessToken) {
         // Redirect the user to Discord OAuth URL for authentication
-        window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email`;
+        window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds.members.read%20guilds.join`;
       } else {
         // Redirect to /dashboard or any other authenticated page
         window.location.href = '/dashboard';

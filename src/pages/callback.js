@@ -17,25 +17,21 @@ const Callback = () => {
       axios
         .post("/api/auth/discord", { code })
         .then((response) => {
-          const { access_token } = response.data;
-          Cookies.set("access_token", access_token, { expires: 1 });
-          router.push("/dashboard");
+          const { access_token, beta_access } = response.data;
+          if (!beta_access) {
+            router.push("/not-beta-tester");
+          } else {
+            Cookies.set("access_token", access_token, { expires: 1 });
+            router.push("/dashboard");
+          }
         })
         .catch((error) => {
-          console.error(error);
           setErrorMessage("An error occurred during authentication.");
           setTimeout(() => {
             setAuthInProgress(false);
             setShowErrorPage(true);
           }, 1000);
         });
-    }
-    if (!code) {
-      setErrorMessage("An error occurred during authentication.");
-      setTimeout(() => {
-        setAuthInProgress(false);
-        setShowErrorPage(true);
-      }, 1000);
     }
   }, [code]);
 

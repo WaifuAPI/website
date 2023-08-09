@@ -21,7 +21,7 @@ const Dashboard = () => {
     if (!accessToken) {
       // Redirect the user to the Discord OAuth login page
       router.push(
-        `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email`
+        `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds.members.read%20guilds.join`
       )
       return
     }
@@ -43,7 +43,7 @@ const Dashboard = () => {
         Cookies.remove('access_token')
         localStorage.removeItem('showToken')
         router.push(
-          `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email`
+          `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds.members.read%20guilds.join`
         )
       } finally {
         setFetched(true) // Mark user details as fetched
