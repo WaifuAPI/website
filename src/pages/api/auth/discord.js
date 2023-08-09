@@ -89,7 +89,7 @@ export default async function handler(req, res) {
       res.status(200).json({ beta_access: true, access_token: accessToken });
     }
   } catch (error) {
-    console.error("Authentication error", error);
+    console.error("Authentication Error");
     res.status(500).json({ error: "An error occurred during authentication." });
   }
 }
