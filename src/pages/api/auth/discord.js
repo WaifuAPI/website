@@ -28,9 +28,20 @@ async function checkGuildMembershipAndRole(accessToken) {
     );
   }
 
+  // Fetch the user's roles in the guild
+  const guildMemberResponse = await axios.get(
+    `https://discord.com/api/v10/guilds/${targetGuildId}/members/@me`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+
   // Check if the user has the required role in the guild
   const requiredRole = process.env.BETA_ROLE_ID; // Replace with the actual role name
-  const hasRequiredRole = userGuild?.roles.includes(requiredRole);
+  const userRoles = guildMemberResponse.data.roles;
+  const hasRequiredRole = userRoles.includes(requiredRole);
 
   return hasRequiredRole;
 }
