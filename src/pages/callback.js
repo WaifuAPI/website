@@ -36,7 +36,7 @@ const Callback = () => {
   }, [code]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white text-black">
       {authInProgress ? (
         <div className="flex flex-col items-center">
           <p className="text-lg mb-6">Authentication in progress...</p>

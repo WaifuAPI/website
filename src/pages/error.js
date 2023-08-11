@@ -28,7 +28,7 @@ const ErrorPage = ({ message }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white text-black">
       <p className="text-lg mb-6">{message}</p>
       <div className="flex space-x-4 mt-4">
         <button

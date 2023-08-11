@@ -69,7 +69,7 @@ const Home = () => {
   }, [loading])
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-100 min-h-screen text-black">
       <Head>
         <title>Waifu.it</title>
         <meta
@@ -168,7 +168,7 @@ const Home = () => {
             </div>
           </main>
 
-          <footer className="w-full h-12 border-t border-gray-300 flex justify-center items-center mt-auto md:mt-10 lg:mt-20">
+          <footer className="w-full h-12 border-t border-gray-300 flex justify-center items-center mt-auto md:mt-10 lg:mt-20 text-black">
             Made with ❤️ by Aeryk
           </footer>
         </div>
