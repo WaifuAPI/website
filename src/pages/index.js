@@ -1,40 +1,40 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import { useState, useEffect } from 'react'
-import LoadingSpinner from './components/LoadingSpinner'
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
+import Link from "next/link";
+import LoadingSpinner from "./components/LoadingSpinner";
 
-const DashboardButton = () => {
+// Component for the Dashboard button
+const DashboardButton = ({ isSmallScreen }) => {
+  // Function to retrieve a cookie's value
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+    if (parts.length === 2) return parts.pop().split(";").shift();
   };
 
+  // State for button hover effect
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleLogin = async () => {
-    try {
-      const accessToken = getCookie('access_token');
-  
-      if (!accessToken) {
-        // Redirect the user to Discord OAuth URL for authentication
-        window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds.members.read%20guilds.join%20guilds`;
-      } else {
-        // Redirect to /dashboard or any other authenticated page
-        window.location.href = '/dashboard';
-      }
-    } catch (error) {
-      console.error('Error during Discord OAuth:', error);
+  // Handling login button click
+  const handleLogin = () => {
+    const accessToken = getCookie("access_token");
+    const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds.members.read%20guilds.join%20guilds`;
+
+    if (!accessToken) {
+      window.location.href = oauthUrl;
+    } else {
+      window.location.href = "/dashboard";
     }
   };
-  
 
   return (
     <button
       onClick={handleLogin}
-      className={`fixed top-8 right-20 z-10 bg-blue-500 text-white font-indie-flower px-4 py-2 rounded-lg ${
-        isHovered ? 'bg-blue-600' : ''
-      } transition-all duration-300`}
+      className={`fixed z-10 bg-blue-500 text-white font-indie-flower px-4 py-2 rounded-lg ${
+        isHovered ? "bg-blue-600" : ""
+      } transition-all duration-300 ${
+        isSmallScreen ? "bottom-12 right-10" : "top-8 right-20"
+      }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -43,30 +43,51 @@ const DashboardButton = () => {
   );
 };
 
+// Main Home component
 const Home = () => {
-  const [loading, setLoading] = useState(true)
+  // State for loading state
+  const [loading, setLoading] = useState(true);
 
+  // State for tracking screen size
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  // Simulating data fetching delay
   useEffect(() => {
-    // Simulate data fetching delay
     setTimeout(() => {
-      setLoading(false)
-    }, 2000)
-  }, [])
+      setLoading(false);
+    }, 2000);
+  }, []);
 
+  // Handling window resize to determine screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 640);
+    };
+
+    // Initial call and event listener setup
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup for event listener
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Triggering animation after the loader completes
   useEffect(() => {
     if (!loading) {
-      // Trigger animation after the loader completes
       const animateGridItems = () => {
-        const gridItems = document.querySelectorAll('.grid-item')
+        const gridItems = document.querySelectorAll(".grid-item");
         gridItems.forEach((item, index) => {
-          item.style.animationDelay = `${index * 220}ms`
-          item.classList.add('animate-fadeInUp')
-        })
-      }
+          item.style.animationDelay = `${index * 220}ms`;
+          item.classList.add("animate-fadeInUp");
+        });
+      };
 
-      animateGridItems()
+      animateGridItems();
     }
-  }, [loading])
+  }, [loading]);
 
   return (
     <div className="bg-gray-100 min-h-screen text-black">
@@ -104,7 +125,7 @@ const Home = () => {
         </div>
       ) : (
         <div>
-          <DashboardButton />
+          <DashboardButton isSmallScreen={isSmallScreen} />
           <main className="max-w-screen-lg mx-auto py-20 px-4">
             <h1 className="text-4xl font-bold text-center mb-6">
               <Link
@@ -174,7 +195,7 @@ const Home = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
