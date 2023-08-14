@@ -282,7 +282,7 @@ const Dashboard = () => {
                       type={showToken ? "text" : "password"}
                       value={randomToken}
                       readOnly
-                      className={`w-full px-3 py-2 rounded-md bg-white border border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                      className={`w-full px-3 py-2 pr-10 rounded-md bg-white border border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
                         showToken ? "text-base" : "text-sm"
                       } md:text-base text-ellipsis`}
                       onWheel={handleScroll}
