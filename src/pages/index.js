@@ -18,9 +18,8 @@ const DashboardButton = ({ isSmallScreen }) => {
   // Handling login button click
   const handleLogin = () => {
     const accessToken = getCookie("access_token");
-    const cid = encodeURIComponent(process.env.CLIENT_ID).toString()
-    const redirurl = encodeURIComponent(process.env.REDIRECT_URL).toString() 
-    const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${cid}&redirect_uri=${redirurl}&response_type=code&scope=identify%20email%20guilds.members.read%20guilds.join%20guilds`;
+    const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds.members.read%20guilds.join%20guilds`;
+
     if (!accessToken) {
       window.location.href = oauthUrl;
     } else {
@@ -91,7 +90,7 @@ const Home = () => {
   }, [loading]);
 
   return (
-    <div className="bg-gray-100 min-h-screen text-black">
+    <div className="flex nowrap flex-col items-center justify-center bg-gray-100 min-h-screen text-black">
       <Head>
         <title>Waifu.it</title>
         <meta
@@ -121,14 +120,14 @@ const Home = () => {
       </Head>
 
       {loading ? (
-        <div className="flex flex-grow items-center justify-center">
+        <div className="min-h-screen flex flex-grow items-center justify-center">
           <LoadingSpinner />
         </div>
       ) : (
-        <div>
+        <div className="flex flex-grow min-h-screen90  items-center justify-between flex-col">
           <DashboardButton isSmallScreen={isSmallScreen} />
-          <main className="max-w-screen-lg mx-auto py-20 px-4">
-            <h1 className="text-4xl font-bold text-center mb-6">
+          <main className="max-w-screen-lg py-20 px-4  flex flex-col nowrap items-center justify-center">
+            <h1 className="text-4xl font-bold mb-6 text-center">
               <Link
                 className="text-blue-500 hover:underline focus:underline active:underline"
                 href="/"
@@ -137,7 +136,7 @@ const Home = () => {
               </Link>
             </h1>
 
-            <p className="text-xl text-center mb-12">
+            <p className="text-xl text-center mb-12 ">
               An Open-source API Serving Bunch of Anime stuff
             </p>
 
@@ -190,7 +189,7 @@ const Home = () => {
             </div>
           </main>
 
-          <footer className="w-full h-12 border-t border-gray-300 flex justify-center items-center mt-auto md:mt-10 lg:mt-20 text-black">
+          <footer className="w-full h-12 border-t border-gray-300 flex justify-center items-center mb-6 md:mt-10 lg:mt-20 text-black">
             Made with ❤️ by Aeryk
           </footer>
         </div>
