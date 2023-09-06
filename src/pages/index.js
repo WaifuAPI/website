@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import LoadingSpinner from "./components/LoadingSpinner";
+import { FaUnderline } from "react-icons/fa";
 
 // Component for the Dashboard button
 const DashboardButton = ({ isSmallScreen }) => {
@@ -90,7 +91,7 @@ const Home = () => {
   }, [loading]);
 
   return (
-    <div className="bg-gray-100 min-h-screen text-black">
+    <div className="flex fnowrap flex-col items-center justify-center bg-gray-100 min-h-screen text-black">
       <Head>
         <title>Waifu.it</title>
         <meta
@@ -120,14 +121,14 @@ const Home = () => {
       </Head>
 
       {loading ? (
-        <div className="flex flex-grow items-center justify-center">
+        <div className="min-h-screen flex flex-grow items-center justify-center">
           <LoadingSpinner />
         </div>
       ) : (
-        <div>
+        <div style={{minWidth:'320px'}} className="flex flex-grow min-h-screen90  items-center justify-between flex-col">
           <DashboardButton isSmallScreen={isSmallScreen} />
-          <main className="max-w-screen-lg mx-auto py-20 px-4">
-            <h1 className="text-4xl font-bold text-center mb-6">
+          <main className="max-w-screen-lg py-20 px-4  flex flex-col nowrap items-center justify-center">
+            <h1 className="text-4xl font-bold mb-6 text-center">
               <Link
                 className="text-blue-500 hover:underline focus:underline active:underline"
                 href="/"
@@ -136,7 +137,7 @@ const Home = () => {
               </Link>
             </h1>
 
-            <p className="text-xl text-center mb-12">
+            <p className="text-xl text-center mb-12 ">
               An Open-source API Serving Bunch of Anime stuff
             </p>
 
@@ -188,9 +189,8 @@ const Home = () => {
               </Link>
             </div>
           </main>
-
-          <footer className="w-full h-12 border-t border-gray-300 flex justify-center items-center mt-auto md:mt-10 lg:mt-20 text-black">
-            Made with ❤️ by Aeryk
+          <footer className="w-full h-12 border-t border-gray-300 flex justify-center items-center mb-6 md:mt-10 lg:mt-20 text-black">
+            Made with ❤️ by <a className="" href="https://github.com/WaifuAPI/website/commits?author=kyrea"> Aeryk</a> 
           </footer>
         </div>
       )}

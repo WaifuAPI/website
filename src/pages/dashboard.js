@@ -229,20 +229,17 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black">
-      <ToastContainer />
+    <div style={{minWidth:'310px'}} className="min-h-screen flex flex-col   justify-between  bg-white text-black">
       {fetched && user ? (
         <>
-          <div className="p-4">
-            <nav className="max-w-screen-lg mx-auto flex flex-col md:flex-row items-center justify-between">
-              <div className="text-white font-bold text-xl mb-4 md:mb-0">
-                Dashboard
-              </div>
-              <div className="space-x-4 flex items-center relative">
+          <div  className="p-4">
+
+            <ToastContainer />
+            <nav className="max-w-screen-lg mx-auto flex flex-col md:flex-row items-center justify-between fwrap">
+              <div className="text-white font-bold text-xl mb-4 md:mb-0">Dashboard</div>
+              <div className="flex flex-row items-center justify-between fwrap gap-4">
                 {/* Home button */}
-                <button onClick={() => router.push("/")} className="nav-button">
-                  Home
-                </button>
+                <button onClick={() => router.push("/")} className="nav-button">Home</button>
                 {/* Documentation button */}
                 <button
                   onClick={() => router.push("https://docs.waifu.it")}
@@ -265,12 +262,11 @@ const Dashboard = () => {
             </nav>
           </div>
 
-          <div className="py-8">
+          <div className=" ">
             <div className="max-w-screen-lg mx-auto px-4">
               {randomToken && (
                 <div
-                  className="max-w-md mx-auto bg-gray-100 p-4 rounded-md mb-4"
-                  style={{ marginTop: "140px" }}
+                  className="max-w-md mx-auto bg-gray-100 p-4 rounded-md mb-4" 
                 >
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-sm font-medium">Token:</span>
@@ -282,9 +278,8 @@ const Dashboard = () => {
                       type={showToken ? "text" : "password"}
                       value={randomToken}
                       readOnly
-                      className={`w-full px-3 py-2 pr-10 rounded-md bg-white border border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                        showToken ? "text-base" : "text-sm"
-                      } md:text-base text-ellipsis`}
+                      className={`w-full px-3 py-2 pr-10 rounded-md bg-white border border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${showToken ? "text-base" : "text-sm"
+                        } md:text-base text-ellipsis`}
                       onWheel={handleScroll}
                     />
                     <div
@@ -295,7 +290,7 @@ const Dashboard = () => {
                     </div>
                   </div>
 
-                  <div className="mt-4 flex justify-end space-x-2">
+                  <div className="mt-4 flex justify-end   flex-row fwrap space-x-2">
                     <button
                       onClick={handleRegenerateToken}
                       className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
@@ -315,11 +310,8 @@ const Dashboard = () => {
               )}
             </div>
           </div>
-          <footer
-            className="w-full h-12 border-t border-gray-300 flex justify-center items-center mt-auto md:mt-10 lg:mt-20 text-sm"
-            style={{ marginTop: "160px" }}
-          >
-            Made with ❤️ by Aeryk
+          <footer className="w-full h-12 border-t border-gray-300 flex justify-center items-center mb-6   text-black">
+            Made with ❤️ by <a className="" href="https://github.com/WaifuAPI/website/commits?author=kyrea"> Aeryk</a>
           </footer>
         </>
       ) : (
