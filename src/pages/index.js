@@ -190,7 +190,7 @@ const Home = () => {
             </div>
           </main>
           <footer className="w-full h-12 border-t border-gray-300 flex justify-center items-center mb-6 md:mt-10 lg:mt-20 text-black">
-            Made with ❤️ by <a className="underline" href="https://github.com/WaifuAPI/website/commits?author=kyrea"> Aeryk</a> 
+            Made with ❤️ by <a className="" href="https://github.com/WaifuAPI/website/commits?author=kyrea"> Aeryk</a> 
           </footer>
         </div>
       )}
