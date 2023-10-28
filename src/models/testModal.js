@@ -7,6 +7,9 @@ const testSchema = new Schema({
     required: true,
     unique: true,
   },
+  password: String,
+  hash: String,
+  hash_key: String,
 });
 
 const Test = models.Test || model('Test', testSchema);
