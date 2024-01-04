@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     if (!Authorization) {
       return res
         .status(401)
-        .json({ message: 'Unauthorized' })
+         .json({ status: 401, message: 'Invalid API key. Go to https://docs.waifu.it for more info.' })
     }
 
     try {

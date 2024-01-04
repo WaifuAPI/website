@@ -45,8 +45,6 @@ const Dashboard = () => {
         router.push(
           `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds.members.read%20guilds.join%20guilds`
         );
-      } finally {
-        setFetched(true); // Mark user details as fetched
       }
     };
 
@@ -64,6 +62,7 @@ const Dashboard = () => {
       );
 
       setRandomToken(response.data);
+      setFetched(true); // Mark user details as fetched
     };
 
     // Call the function to fetch user details
@@ -231,89 +230,107 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-white text-black">
       <ToastContainer />
-      {fetched && user ? (
-        <>
-<div className="bg-gradient-to-r from-blue-500 to-blue-400 text-white p-4 font-sans">
-  <nav className="max-w-screen-lg mx-auto flex flex-col md:flex-row items-center justify-between">
-    <div className="text-white font-extrabold text-3xl mb-4 md:mb-0">
-      Dashboard
-    </div>
-    <div className="space-x-4 flex items-center relative">
-      {/* Home button */}
-      <button
-        onClick={() => router.push("/")}
-        className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
-      >
-        Home
-      </button>
-      {/* Documentation button */}
-      <button
-        onClick={() => router.push("https://docs.waifu.it")}
-        className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
-      >
-        Documentation
-      </button>
-      {/* User picture and Logout button */}
-      <div className="flex items-center space-x-4">
-        <img
-          src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
-          alt={user.username}
-          className="w-8 h-8 rounded-full cursor-pointer border-2 border-white"
-        />
-        <button
-          onClick={handleLogoutClick}
-          className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
-        >
-          Logout
-        </button>
-      </div>
-    </div>
-  </nav>
-</div>
-
-
-
-<div className="py-8">
-  <div className="max-w-screen-lg mx-auto px-4">
-    {randomToken && (
-      <div className="max-w-md mx-auto bg-gray-100 p-4 rounded-md mb-4" style={{ marginTop: "140px" }}>
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium">Token:</span>
+      {!fetched ? (
+        <div className="flex flex-grow items-center justify-center">
+          <LoadingSpinner />
         </div>
+      ) : (
+        <>
+          <div className="bg-gradient-to-r from-blue-500 to-blue-400 text-white p-4 font-sans">
+            <nav className="max-w-screen-lg mx-auto flex flex-col md:flex-row items-center justify-between">
+              <div className="text-white font-extrabold text-3xl mb-4 md:mb-0">
+                Dashboard
+              </div>
+              <div className="space-x-4 flex items-center relative">
+                {/* Home button */}
+                <button
+                  onClick={() => router.push("/")}
+                  className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
+                >
+                  Home
+                </button>
+                {/* Documentation button */}
+                <button
+                  onClick={() => router.push("https://docs.waifu.it")}
+                  className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
+                >
+                  Documentation
+                </button>
+                {/* Documentation button */}
+                <button
+                  onClick={() => router.push("/tools")}
+                  className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
+                >
+                  Tools
+                </button>
+                {/* User picture and Logout button */}
+                <div className="flex items-center space-x-4">
+                  <img
+                    src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
+                    alt={user.username}
+                    className="w-8 h-8 rounded-full cursor-pointer border-2 border-white"
+                  />
+                  <button
+                    onClick={handleLogoutClick}
+                    className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            </nav>
+          </div>
 
-        <div className="relative max-w-xs md:max-w-full">
-          <input
-            ref={tokenInputRef}
-            type={showToken ? "text" : "password"}
-            value={randomToken}
-            readOnly
-            className={`
+          <div className="py-8">
+            <div className="max-w-screen-lg mx-auto px-4">
+              {randomToken && (
+                <div
+                  className="max-w-md mx-auto bg-gray-100 p-4 rounded-md mb-4"
+                  style={{ marginTop: "140px" }}
+                >
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm font-medium">Token:</span>
+                  </div>
+
+                  <div className="relative max-w-xs md:max-w-full">
+                    <input
+                      ref={tokenInputRef}
+                      type={showToken ? "text" : "password"}
+                      value={randomToken}
+                      readOnly
+                      className={`
               w-full px-3 py-2 pr-10 rounded-md bg-white border border-gray-300 placeholder-gray-400 
               focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
               ${showToken ? "text-base" : "text-sm"} md:text-base text-ellipsis
             `}
-            onWheel={handleScroll}
-          />
-          <div className="absolute top-0 right-0 bottom-0 flex items-center px-3 cursor-pointer" onClick={handleToggleShowToken}>
-            {getEyeIcon()}
-          </div>
-        </div>
+                      onWheel={handleScroll}
+                    />
+                    <div
+                      className="absolute top-0 right-0 bottom-0 flex items-center px-3 cursor-pointer"
+                      onClick={handleToggleShowToken}
+                    >
+                      {getEyeIcon()}
+                    </div>
+                  </div>
 
-        <div className="mt-4 flex justify-end space-x-2">
-          <button
-            onClick={handleRegenerateToken}
-            className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-          >
-            Regenerate
-          </button>
-          <button onClick={handleCopyToken} className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
-            Copy
-          </button>
-        </div>
-      </div>
-    )}
-  </div>
-</div>
+                  <div className="mt-4 flex justify-end space-x-2">
+                    <button
+                      onClick={handleRegenerateToken}
+                      className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                    >
+                      Regenerate
+                    </button>
+                    <button
+                      onClick={handleCopyToken}
+                      className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
 
           {/* <footer
             className="w-full h-12 border-t border-gray-300 flex justify-center items-center mt-auto md:mt-10 lg:mt-20 text-sm"
@@ -322,10 +339,6 @@ const Dashboard = () => {
             Made with ❤️ by Aeryk
           </footer> */}
         </>
-      ) : (
-        <div className="flex flex-grow items-center justify-center">
-          <LoadingSpinner />
-        </div>
       )}
     </div>
   );

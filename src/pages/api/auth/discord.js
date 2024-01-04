@@ -1,6 +1,6 @@
 import axios from "axios";
 
-async function checkGuildMembershipAndRole(accessToken) {
+async function checkGuildMembershipAndRole(accessToken, role) {
   const usersResponse = await axios.get(
     "https://discord.com/api/v10/users/@me",
     {
@@ -52,7 +52,7 @@ async function checkGuildMembershipAndRole(accessToken) {
   );
 
   // Check if the user has the required role in the guild
-  const requiredRole = process.env.BETA_ROLE_ID; // Replace with the actual role name
+  const requiredRole = role; // Replace with the actual role name
   const hasRequiredRole = guildMemberResponse.data.roles.includes(requiredRole);
   return hasRequiredRole;
 }
@@ -83,7 +83,8 @@ export default async function handler(req, res) {
     );
     const accessToken = response.data.access_token;
 
-    const hasRequiredRole = await checkGuildMembershipAndRole(accessToken);
+    const hasRequiredRole = await checkGuildMembershipAndRole(accessToken, process.env.BETA_ROLE_ID);
+
     if (!hasRequiredRole) {
       res.status(200).json({ beta_access: false });
     } else {
