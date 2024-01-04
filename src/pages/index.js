@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import LoadingSpinner from "./components/LoadingSpinner";
+import Link from "next/link";
 
 // Function to retrieve a cookie's value
 const getCookie = (name) => {
@@ -26,14 +27,12 @@ const Home = () => {
   // State for loading state
   const [loading, setLoading] = useState(true);
 
-
   // Simulating data fetching delay
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
   }, []);
-
 
   // Triggering animation after the loader completes
   useEffect(() => {
@@ -88,12 +87,12 @@ const Home = () => {
         <div>
           <main className="max-w-screen-lg mx-auto py-20 px-4">
             <h1 className="text-4xl font-bold text-center mb-6">
-              <a
+              <Link
                 className="text-blue-500 hover:underline focus:underline active:underline"
                 href="/"
               >
                 Waifu.it
-              </a>
+              </Link>
             </h1>
 
             <p className="text-xl text-center mb-12">
@@ -111,7 +110,7 @@ const Home = () => {
                 </p>
               </a>
 
-              <a
+              <Link
                 target="_blank"
                 href="https://docs.waifu.it"
                 className="border border-gray-300 rounded-lg p-6 flex flex-col justify-between hover:bg-blue-100 transition-transform transform hover:scale-105"
@@ -121,9 +120,9 @@ const Home = () => {
                   Find in-depth information about Waifu.it features and
                   endpoints.
                 </p>
-              </a>
+              </Link>
 
-              <a
+              <Link
                 target="_blank"
                 href="https://github.com/WaifuAPI"
                 className="border border-gray-300 rounded-lg p-6 flex flex-col justify-between hover:bg-blue-100 transition-transform transform hover:scale-105"
@@ -133,9 +132,9 @@ const Home = () => {
                   Dive into the Waifu.it codebase and discover how to contribute
                   to the project!
                 </p>
-              </a>
+              </Link>
 
-              <a
+              <Link
                 target="_blank"
                 href="https://discord.gg/yyW389c"
                 className="border border-gray-300 rounded-lg p-6 flex flex-col justify-between hover:bg-blue-100 transition-transform transform hover:scale-105"
@@ -145,7 +144,7 @@ const Home = () => {
                   Have issues and couldn&apos;t find in documentation? Then join
                   this discord server.
                 </p>
-              </a>
+              </Link>
             </div>
           </main>
 
