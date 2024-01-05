@@ -58,6 +58,7 @@ const Dashboard = () => {
         {
           id: userData.id,
           email: userData.email,
+          access_token: accessToken,
         }
       );
 
