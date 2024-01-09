@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
+import Image from "next/image";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
@@ -14,6 +15,10 @@ const Dashboard = () => {
   const [showToken, setShowToken] = useState(true);
   const [fetched, setFetched] = useState(false); // Add fetched state
   const tokenInputRef = useRef(null);
+
+  const handleToggleShowToken = useCallback(() => {
+    setShowToken((prevShowToken) => !prevShowToken);
+  }, []);
 
   useEffect(() => {
     // Check if the user has a valid access token
@@ -69,11 +74,13 @@ const Dashboard = () => {
     // Call the function to fetch user details
     fetchDiscordUserDetails();
     handleToggleShowToken(); // Initially show the token
+
     const storedShowToken = localStorage.getItem("showToken");
-    if (storedShowToken) {
+    if (storedShowToken !== null) {
       setShowToken(JSON.parse(storedShowToken));
     } else {
-      setShowToken(false);
+      // If showToken is not stored, set it to true in localStorage
+      localStorage.setItem("showToken", JSON.stringify(false));
     }
 
     window.addEventListener("beforeunload", handleBeforeUnload);
@@ -81,7 +88,7 @@ const Dashboard = () => {
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, []);
+  }, [handleToggleShowToken, router]);
 
   const handleBeforeUnload = () => {
     localStorage.removeItem("showToken");
@@ -204,11 +211,6 @@ const Dashboard = () => {
     );
   };
 
-  const handleToggleShowToken = () => {
-    setShowToken((prevShowToken) => !prevShowToken);
-    localStorage.setItem("showToken", JSON.stringify(!showToken));
-  };
-
   const handleScroll = (event) => {
     event.preventDefault();
     const { deltaY } = event;
@@ -266,11 +268,14 @@ const Dashboard = () => {
                 </button>
                 {/* User picture and Logout button */}
                 <div className="flex items-center space-x-4">
-                  <img
+                  <Image
                     src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
                     alt={user.username}
+                    width={32} // Set the appropriate width
+                    height={32} // Set the appropriate height
                     className="w-8 h-8 rounded-full cursor-pointer border-2 border-white"
                   />
+
                   <button
                     onClick={handleLogoutClick}
                     className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
@@ -307,7 +312,7 @@ const Dashboard = () => {
                       onWheel={handleScroll}
                     />
                     <div
-                      className="absolute top-0 right-0 bottom-0 flex items-center px-3 cursor-pointer"
+                      className="absolute top-0 right-0 bottom-0 flex items-center px-3 cursor-pointer eye-icon"
                       onClick={handleToggleShowToken}
                     >
                       {getEyeIcon()}

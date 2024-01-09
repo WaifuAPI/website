@@ -13,7 +13,18 @@ const nextConfig = {
     API_URL: process.env.API_URL,
     BOT_TOKEN: process.env.BOT_TOKEN,
     GUILD_ID: process.env.GUILD_ID,
-    BETA_ROLE_ID: process.env.BETA_ROLE_ID
+    BETA_ROLE_ID: process.env.BETA_ROLE_ID,
+  },
+  images: {
+    domains: ["cdn.discordapp.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
+        port: "",
+        pathname: "/avatars/**", // Adjust the pathname to match your use case
+      },
+    ],
   },
 };
 

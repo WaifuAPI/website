@@ -1,19 +1,20 @@
 /**
- * @description This section of code should be interpreted with caution. 
- * Its presence in the production environment is not an indication that 
- * the associated feature is slated for inclusion in the final product. 
- * Instead, this code functions as a local testing prototype, allowing 
+ * @description This section of code should be interpreted with caution.
+ * Its presence in the production environment is not an indication that
+ * the associated feature is slated for inclusion in the final product.
+ * Instead, this code functions as a local testing prototype, allowing
  * developers to assess its functionality in an isolated environment.
- * As of the current state, it has been temporarily introduced into the 
- * production codebase for the specific purpose of conducting internal checks 
- * and evaluations. This inclusion does not guarantee the permanence or 
+ * As of the current state, it has been temporarily introduced into the
+ * production codebase for the specific purpose of conducting internal checks
+ * and evaluations. This inclusion does not guarantee the permanence or
  * implementation of the corresponding feature in future releases.
- * Developers are advised to regard this code as experimental and subject 
- * to potential modifications or removal in subsequent development phases. 
- * Any assumptions about its integration into the production version should 
- * be avoided, as its primary role is to facilitate internal testing rather 
+ * Developers are advised to regard this code as experimental and subject
+ * to potential modifications or removal in subsequent development phases.
+ * Any assumptions about its integration into the production version should
+ * be avoided, as its primary role is to facilitate internal testing rather
  * than signify upcoming features.
  */
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
@@ -264,11 +265,14 @@ const ToolsPage = () => {
                 </button>
                 {loggedInUser && (
                   <div className="flex items-center space-x-4">
-                    <img
+                    <Image
                       src={`https://cdn.discordapp.com/avatars/${loggedInUser.id}/${loggedInUser.avatar}.png`}
                       alt={loggedInUser.username}
+                      width={32} // Set the appropriate width
+                      height={32} // Set the appropriate height
                       className="w-8 h-8 rounded-full cursor-pointer border-2 border-white"
                     />
+
                     <button
                       onClick={handleLogoutClick}
                       className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
