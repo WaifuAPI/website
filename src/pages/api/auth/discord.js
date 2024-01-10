@@ -1,6 +1,6 @@
 import axios from "axios";
 
-async function checkGuildMembershipAndRole(accessToken, role) {
+async function checkGuildMembership(accessToken) {
   const usersResponse = await axios.get(
     "https://discord.com/api/v10/users/@me",
     {
@@ -26,35 +26,19 @@ async function checkGuildMembershipAndRole(accessToken, role) {
 
   if (!userGuild) {
     // User is not in the guild, add them
-    await axios
-      .put(
-        `https://discord.com/api/v10/guilds/${targetGuildId}/members/${targetUserId}`,
-        {
-          access_token: accessToken
-        },
-        {
-          headers: {
-            Authorization: `Bot ${process.env.BOT_TOKEN}`, // Replace with your bot token
-            'Content-Type': 'application/json',
-          },
-        }
-      )
-  }
-
-  // Fetch the user's roles in the guild
-  const guildMemberResponse = await axios.get(
-    `https://discord.com/api/v10/users/@me/guilds/${targetGuildId}/member`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
+    await axios.put(
+      `https://discord.com/api/v10/guilds/${targetGuildId}/members/${targetUserId}`,
+      {
+        access_token: accessToken,
       },
-    }
-  );
-
-  // Check if the user has the required role in the guild
-  const requiredRole = role; // Replace with the actual role name
-  const hasRequiredRole = guildMemberResponse.data.roles.includes(requiredRole);
-  return hasRequiredRole;
+      {
+        headers: {
+          Authorization: `Bot ${process.env.BOT_TOKEN}`, // Replace with your bot token
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
 }
 
 export default async function handler(req, res) {
@@ -83,13 +67,9 @@ export default async function handler(req, res) {
     );
     const accessToken = response.data.access_token;
 
-    const hasRequiredRole = await checkGuildMembershipAndRole(accessToken, process.env.BETA_ROLE_ID);
+    await checkGuildMembership(accessToken);
 
-    if (!hasRequiredRole) {
-      res.status(200).json({ beta_access: false });
-    } else {
-      res.status(200).json({ beta_access: true, access_token: accessToken });
-    }
+    return res.status(200).json({ access_token: accessToken });
   } catch (error) {
     console.error("Authentication Error", error);
     res.status(500).json({ error: "An error occurred during authentication." });

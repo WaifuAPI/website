@@ -47,31 +47,14 @@ clear and has sufficient instructions to be able to reproduce the issue. Report 
 **Requirements**
 
 - Node >= 12.x
-- MongoDB
 
-**1. Create a database**
-
-Create a MongoDB database.
-
-If you don't have MongoDB setup locally, then you can use [MongoDB Atlas][mongodb/atlas] to create a free hosted database.
-
-**2. Environment Variables**
-
-You need to set the `MONGODB_URI` environment variable to point to your database.
-
-Create a file called `.env` in the root directory of the project. Copy everything from `.env_example` and replace `<your-database-uri>` with the connection string for your database, _other env variables info are commented in the file itself._
-
-```shell
-MONGODB_URI=<your-mongodb-uri>
-```
-
-**3. Installing dependencies**
+**1. Installing dependencies**
 
 ```shell
 $ npm install
 ```
 
-**4. Starting the Server**
+**2. Starting the Server**
 
 The server will automatically restart when you make changes to the code.
 
