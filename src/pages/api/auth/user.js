@@ -4,7 +4,6 @@ import axios from "axios";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const { id, email, token, access_token } = req.body;
-    const accessToken = access_token;
     const apiKey = process.env.ACCESS_KEY; // Replace 'API_KEY' with the actual environment variable name that holds your API key
 
     if (!id && !token) {
@@ -20,7 +19,7 @@ export default async function handler(req, res) {
             key: apiKey,
             id,
             email,
-            accessToken,
+            "access-token": access_token,
           },
         });
         res.json(api_response.data);
