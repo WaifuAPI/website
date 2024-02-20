@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 
 dotenv.config({ path: require("find-config")(".env") });
 const nextConfig = {
+  crossOrigin: "anonymous",
   reactStrictMode: true,
   env: {
     CLIENT_ID: process.env.CLIENT_ID,
