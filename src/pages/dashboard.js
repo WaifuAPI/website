@@ -127,16 +127,12 @@ const Dashboard = () => {
         throw new Error("Access token not found.");
       }
 
-      const newToken = generateToken(user.id, process.env.HMAC_KEY);
-
-      // Send the new token to the server to save it, similar to the original logic
-      const response = await axios.post("/api/auth/user", {
-        id: user.id,
-        token: newToken,
+      // Call the server endpoint to generate and save new token
+      const response = await axios.post("/api/auth/regenerate-token", {
+        userId: user.id,
       });
 
-      setRandomToken({ token: newToken });
-      setShowToken(true);
+      setRandomToken({ token: response.data.token });
 
       // Update the last regeneration time on the client-side
       localStorage.setItem("last_regen_time", currentTime.toString());
@@ -144,15 +140,13 @@ const Dashboard = () => {
       toast.info("Successfully regenerated!", {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
-
-      console.log(response.data);
     } catch (error) {
       if (error.message.startsWith("Rate limit exceeded")) {
         toast.error(error.message, {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
       } else {
-        console.error("Error regenerating token");
+        console.error("Error regenerating token:", error);
         toast.error("Error regenerating token.", {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
