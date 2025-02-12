@@ -3,7 +3,6 @@ import { useTypewriter } from "./components/hooks/useTypewriter.js";
 import Head from "next/head";
 import Link from "next/link";
 import {
-  FaCrown,
   FaChevronDown,
   FaChevronUp,
   FaCheck,
