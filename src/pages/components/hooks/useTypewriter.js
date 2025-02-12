@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useTypewriter(
+export default function useTypewriter(
   text,
   speed = 150,
   eraseSpeed = 75,
