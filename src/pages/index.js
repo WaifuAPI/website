@@ -9,6 +9,7 @@ import {
   FaArrowRight,
   FaChevronDown,
   FaChevronUp,
+  FaCrown,
 } from "react-icons/fa";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { Transition } from "@headlessui/react";
@@ -62,6 +63,30 @@ const Home = () => {
     setHoveredButton(null);
   };
 
+  const premiumButtonTexts = [
+    "🌟 Upgrade to Premium!",
+    "🚀 Go Premium Now!",
+    "💎 Unlock Premium!",
+    "🔥 Get Premium Access!",
+    "🎉 Join Premium Today!",
+    "🌟 Level Up with Premium!",
+    "💖 Treat Yourself to Premium!",
+    "🚀 Blast Off with Premium!",
+    "🎁 Exclusive Perks Await!",
+    "⭐ Access Premium Features",
+    "💼 Upgrade More Benefits",
+    "🔓 Unlock Exclusive Features",
+    "🎯 Get Best Experience",
+  ];
+
+  const [premiumButtonText, setPremiumButtonText] = useState("");
+  // Select a random button text on each render
+  useEffect(() => {
+    setPremiumButtonText(
+      premiumButtonTexts[Math.floor(Math.random() * premiumButtonTexts.length)]
+    );
+  }, []);
+
   return (
     <>
       <Head>
@@ -112,23 +137,35 @@ const Home = () => {
                 )}
               </button>
               <div className="hidden lg:flex lg:items-center lg:space-x-6">
+                <Link href="/" className="text-white hover:text-gray-300">
+                  Home
+                </Link>
                 <Link
+                  target="_blank"
                   href="https://discord.gg/yyW389c"
                   className="text-white hover:text-gray-300"
                 >
                   Support
                 </Link>
                 <Link
+                  target="_blank"
                   href="https://ko-fi.com/Aeryk"
                   className="text-white hover:text-gray-300"
                 >
                   Donate Us
                 </Link>
                 <Link
+                  target="_blank"
                   href="https://github.com/WaifuAPI"
                   className="text-white hover:text-gray-300"
                 >
                   GitHub
+                </Link>
+                <Link
+                  href="/premium"
+                  className="text-white font-medium px-4 py-2 rounded-md bg-gray-800 hover:bg-white hover:text-gray-900 transition duration-300 border border-gray-600"
+                >
+                  <span className="text-lg">{premiumButtonText}</span>
                 </Link>
               </div>
             </div>
@@ -148,6 +185,12 @@ const Home = () => {
                 >
                   <div className="px-7 pt-2 pb-3 space-y-1">
                     <Link
+                      href="/"
+                      className="block text-white mt-1 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      Home
+                    </Link>
+                    <Link
                       href="https://discord.gg/yyW389c"
                       className="block text-white mt-1 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
                     >
@@ -164,6 +207,13 @@ const Home = () => {
                       className="block text-white mt-1 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
                     >
                       GitHub
+                    </Link>
+                    <Link
+                      href="/premium"
+                      className="inline-flex items-center gap-2 text-white font-semibold px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-600 transition duration-300"
+                    >
+                      {/* <span className="text-lg">💎 Unlock Premium!</span> */}
+                      <span className="text-lg">{premiumButtonText}</span>
                     </Link>
                   </div>
                 </div>
@@ -331,21 +381,24 @@ const Home = () => {
         <footer className="bg-gray-900 py-4 px-12 lg:px-18 mt-auto">
           <div className="container mx-auto px-5 text-center lg:text-left -translate-y-2">
             <div className="flex flex-col space-y-4 lg:flex-row lg:items-center lg:justify-between">
-              <div className="text-white">&copy; Waifu.it 2024</div>
+              <div className="text-white">&copy; Waifu.it 2025</div>
               <div className="flex justify-center lg:justify-start space-x-4">
                 <Link
+                  target="_blank"
                   href="https://raw.githubusercontent.com/WaifuAPI/Waifu.it/production/PRIVACY_POLICY.md"
                   className="text-gray-400 hover:text-white"
                 >
                   Privacy
                 </Link>
                 <Link
-                  href="https://raw.githubusercontent.com/WaifuAPI/Waifu.it/production/LICENCE.md"
+                  target="_blank"
+                  href="https://docs.waifu.it/tos"
                   className="text-gray-400 hover:text-white"
                 >
-                  Terms
+                  Terms of Service
                 </Link>
                 <Link
+                  target="_blank"
                   href="https://ko-fi.com/Aeryk"
                   className="text-gray-400 hover:text-white"
                 >

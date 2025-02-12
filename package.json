@@ -1,6 +1,6 @@
 {
   "name": "waifu-it-website",
-  "version": "2.1.2",
+  "version": "2.2.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -25,11 +25,13 @@
     "js-cookie": "^3.0.5",
     "mongoose": "^7.4.2",
     "next": "^15.0.3",
+    "nprogress": "^0.2.0",
     "postcss": "^8.4.27",
     "react": "18.2.0",
     "react-confirm-alert": "^3.0.6",
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
+    "react-progressbar": "^15.4.1",
     "react-query": "^3.39.3",
     "react-table": "^7.8.0",
     "react-toastify": "^9.1.3",

@@ -1,4 +1,3 @@
-// pages/_app.js
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "tailwindcss/tailwind.css";
@@ -6,6 +5,7 @@ import "../styles/globals.css";
 import "tailwind-scrollbar";
 import Head from "next/head";
 import Script from "next/script";
+import ProgressBar from "./components/ProgressBar"; // Import ProgressBar
 
 const queryClient = new QueryClient();
 
@@ -31,6 +31,7 @@ function MyApp({ Component, pageProps }) {
           gtag('js', new Date()); gtag('config', 'G-7CXJQ1G63J');
         `}
       </Script>
+      <ProgressBar /> {/* Global Progress Bar */}
       <Component {...pageProps} />
       <ReactQueryDevtools />
     </QueryClientProvider>
