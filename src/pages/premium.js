@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useTypewriter } from "./components/hooks/useTypewriter.js";
+import useTypewriter from "./components/hooks/useTypewriter.js";
 import Head from "next/head";
 import Link from "next/link";
 import {
