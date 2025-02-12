@@ -307,7 +307,7 @@ const Dashboard = () => {
                   } p-4 rounded-md mb-4`}
                   style={{ marginTop: "140px" }}
                 >
-                  <div className="flex justify-between items-center mb-2">
+                  <div className="flex justify-between items-center mb-2 select-none">
                     <span className="text-sm font-medium">Token:</span>
                   </div>
                   <div className="relative max-w-xs md:max-w-full">
@@ -322,7 +322,7 @@ const Dashboard = () => {
                   ? "bg-gray-700 border border-gray-600 placeholder-gray-400 text-white"
                   : "bg-white border border-gray-300 placeholder-gray-400 text-black"
               } 
-              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+              focus:outline-none
             `}
                     />
                     <div
@@ -332,7 +332,7 @@ const Dashboard = () => {
                       {getEyeIcon()}
                     </div>
                   </div>
-                  <div className="mt-4 flex justify-end space-x-2">
+                  <div className="mt-4 flex justify-end space-x-2 select-none">
                     <button
                       onClick={handleRegenerateToken}
                       className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
