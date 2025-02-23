@@ -20,8 +20,12 @@ const Callback = () => {
         .then((response) => {
           const { access_token } = response.data;
 
-          Cookies.set("access_token", access_token, { expires: 1 });
-          router.push("/dashboard");
+          Cookies.set("access_token", access_token, {
+            expires: 1,
+            sameSite: "Lax",
+            secure: false,
+          });
+          router.push("/dash");
         })
         .catch((error) => {
           setErrorMessage("An error occurred during authentication.");
