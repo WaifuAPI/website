@@ -2,12 +2,12 @@ import { useState } from "react";
 import DashboardSidebar from "@/components/sidebar/Dashboard";
 import Header from "@/components/pages/dashboard/Header";
 import WorkInProgress from "@/components/pages/global/WorkInProgress";
-import PrivacyCard from "@/components/pages/dashboard/privacy/Card";
+import InfractionsTable from "@/components/pages/dashboard/infractions/InfractionsTable";
 import SubHeader from "@/components/pages/dashboard/SubHeader";
 import ServiceNotAvailable from "@/components/pages/global/ServiceNotAvailable";
 import { ToastContainer } from "react-toastify";
 
-export default function DashboardPrivacy() {
+export default function DashboardInfractions() {
   const [sidebarOpen, setIsSidebarOpen] = useState(false); // state for sidebar visibility
 
   const toggleSidebar = () => {
@@ -30,14 +30,15 @@ export default function DashboardPrivacy() {
 
         <SubHeader
           breadcrumbs={[
-            { label: "Home", href: "/dash" },
-            { label: "Privacy Settings" },
+            { label: "Home", href: "/dashboard" },
+            { label: "Infractions" },
           ]}
         />
+
         <ServiceNotAvailable />
         {/* Dashboard Content */}
         <main className="text-white flex-1 p-8 overflow-auto min-h-[calc(100vh-4rem)] bg-gray-950">
-          <PrivacyCard />
+          <InfractionsTable />
         </main>
       </div>
     </div>

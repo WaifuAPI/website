@@ -17,7 +17,10 @@ export default function ProfileCard() {
       </div>
       <hr className="border-gray-700 my-4 mt-8" />
       <footer className="mt-4">
-        <Link href="/dash/privacy" className="text-blue-400 hover:underline">
+        <Link
+          href="/dashboard/privacy"
+          className="text-blue-400 hover:underline"
+        >
           Go to your Privacy settings
         </Link>
       </footer>

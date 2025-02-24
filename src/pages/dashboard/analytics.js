@@ -28,7 +28,10 @@ export default function DashboardStats() {
         {/* Header */}
         <Header toggleSidebar={toggleSidebar} />
         <SubHeader
-          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Analytics" }]}
+          breadcrumbs={[
+            { label: "Home", href: "/dashboard" },
+            { label: "Analytics" },
+          ]}
         />
 
         {/* Dashboard Content */}

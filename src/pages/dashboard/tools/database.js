@@ -6,7 +6,7 @@ import WorkInProgress from "@/components/pages/global/WorkInProgress";
 import StaffRestricted from "@/components/pages/global/StaffRestricted";
 import { ToastContainer } from "react-toastify";
 
-export default function DashboardUsers() {
+export default function DashboardDatabase() {
   const [sidebarOpen, setIsSidebarOpen] = useState(false); // state for sidebar visibility
 
   const toggleSidebar = () => {
@@ -29,9 +29,9 @@ export default function DashboardUsers() {
 
         <SubHeader
           breadcrumbs={[
-            { label: "Home", href: "/dash" },
-            { label: "Tools", href: "/dash/tools" },
-            { label: "Manage Users" },
+            { label: "Home", href: "/dashboard" },
+            { label: "Tools", href: "/dashboard/tools" },
+            { label: "Database Manager" },
           ]}
         />
 

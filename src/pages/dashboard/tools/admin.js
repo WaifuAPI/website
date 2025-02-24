@@ -29,8 +29,8 @@ export default function DashboardAdmin() {
 
         <SubHeader
           breadcrumbs={[
-            { label: "Home", href: "/dash" },
-            { label: "Tools", href: "/dash/tools" },
+            { label: "Home", href: "/dashboard" },
+            { label: "Tools", href: "/dashboard/tools" },
             { label: "Administrator" },
           ]}
         />

@@ -14,34 +14,34 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import Link from "next/link";
 
 const overviewLinks = [
-  { href: "/dash/overview", label: "Dashboard", icon: FiHome, new: true }, // Add 'new' flag here
-  { href: "/dash/analytics", label: "Analytics", icon: FiBarChart },
+  { href: "/dashboard/overview", label: "Dashboard", icon: FiHome, new: true }, // Add 'new' flag here
+  { href: "/dashboard/analytics", label: "Analytics", icon: FiBarChart },
   {
-    href: "/dash/infractions",
+    href: "/dashboard/infractions",
     label: "Infraction History",
     icon: FiAlertTriangle,
   },
 ];
 
 const managementLinks = [
-  { href: "/dash/tools/users", label: "Users", icon: FiUsers },
+  { href: "/dashboard/tools/users", label: "Users", icon: FiUsers },
   {
-    href: "/dash/tools/database",
+    href: "/dashboard/tools/database",
     label: "Database",
     icon: TbDatabasePlus,
     new: true,
   },
-  { href: "/dash/tools/admin", label: "Admin", icon: FiKey, new: true }, // Add 'new' flag here
+  { href: "/dashboard/tools/admin", label: "Admin", icon: FiKey, new: true }, // Add 'new' flag here
 ];
 
 const settingsLinks = [
   {
-    href: "/dash/profile/overview",
-    highlight: "/dash/profile/*",
+    href: "/dashboard/profile/overview",
+    highlight: "/dashboard/profile/*",
     label: "My Account",
     icon: FiUser,
   },
-  { href: "/dash/privacy", label: "Privacy", icon: FiLock },
+  { href: "/dashboard/privacy", label: "Privacy", icon: FiLock },
 ];
 
 export default function DashboardSidebar({ sidebarOpen, toggleSidebar }) {

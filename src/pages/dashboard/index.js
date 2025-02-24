@@ -7,7 +7,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    router.replace("/dash/overview").then(() => setLoading(false));
+    router.replace("/dashboard/overview").then(() => setLoading(false));
   }, [router]);
 
   return loading ? <Loader /> : null;

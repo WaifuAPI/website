@@ -20,7 +20,7 @@ export default function AuthFailure() {
 
       <div className="flex space-x-4">
         <Link
-          href="/dash"
+          href="/dashboard"
           className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-full text-lg font-semibold shadow-lg transition duration-300"
         >
           Re-authenticate 🔄

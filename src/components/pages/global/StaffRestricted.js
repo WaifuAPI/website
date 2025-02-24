@@ -19,7 +19,7 @@ export default function StaffRestricted() {
       </p>
 
       <Link
-        href="/dash"
+        href="/dashboard"
         className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-full text-lg font-semibold shadow-lg transition duration-300"
       >
         Go Back 🔙

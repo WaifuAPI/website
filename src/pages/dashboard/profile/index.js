@@ -7,7 +7,7 @@ export default function ProfileRedirect() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    router.replace("/dash/profile/overview").then(() => setLoading(false));
+    router.replace("/dashboard/profile/overview").then(() => setLoading(false));
   }, [router]);
 
   return loading ? <Loader /> : null;

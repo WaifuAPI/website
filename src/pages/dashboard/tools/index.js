@@ -7,7 +7,7 @@ export default function ToolsRedirect() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    router.replace("/dash/tools/users").then(() => setLoading(false));
+    router.replace("/dashboard/tools/users").then(() => setLoading(false));
   }, [router]);
 
   return loading ? <Loader /> : null;

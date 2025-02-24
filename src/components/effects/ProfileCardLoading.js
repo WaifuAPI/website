@@ -35,7 +35,7 @@ export default function ProfileCardLoading() {
 
         {/* Username */}
         <Link
-          href="/dash/profile/change-username"
+          href="/dashboard/profile/change-username"
           className="hidden sm:block bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition animate-pulse"
         >
           <div className="flex flex-col sm:flex-row items-center">
@@ -49,7 +49,7 @@ export default function ProfileCardLoading() {
         </Link>
         {/* Small Screen Layout */}
         <Link
-          href="/dash/profile/change-username"
+          href="/dashboard/profile/change-username"
           className="sm:hidden flex flex-row justify-between items-center bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition animate-pulse"
         >
           <div className="flex flex-col">
@@ -62,7 +62,7 @@ export default function ProfileCardLoading() {
 
         {/* Email */}
         <Link
-          href="/dash/profile/change-email"
+          href="/dashboard/profile/change-email"
           className="hidden sm:block bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition animate-pulse"
         >
           <div className="flex flex-col sm:flex-row items-center">
@@ -76,7 +76,7 @@ export default function ProfileCardLoading() {
         </Link>
         {/* Small Screen Layout */}
         <Link
-          href="/dash/profile/change-email"
+          href="/dashboard/profile/change-email"
           className="sm:hidden flex flex-row bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition animate-pulse"
         >
           <div className="flex flex-col w-full">
@@ -87,7 +87,7 @@ export default function ProfileCardLoading() {
 
         {/* Password */}
         <Link
-          href="/dash/profile/change-password"
+          href="/dashboard/profile/change-password"
           className="hidden sm:block bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition animate-pulse"
         >
           <div className="flex flex-col sm:flex-row items-center">
@@ -101,7 +101,7 @@ export default function ProfileCardLoading() {
         </Link>
         {/* Small Screen Layout */}
         <Link
-          href="/dash/profile/change-password"
+          href="/dashboard/profile/change-password"
           className="sm:hidden flex flex-row justify-between items-center bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition animate-pulse"
         >
           <div className="flex flex-col w-3/4">
