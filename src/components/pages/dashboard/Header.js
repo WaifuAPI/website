@@ -1,15 +1,16 @@
+import { useRouter } from "next/router";
 import { useState, useRef, useEffect } from "react";
-import { FiMenu, FiBell } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 import { FaSignOutAlt } from "react-icons/fa"; // Logout icon
 import Link from "next/link";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import axios from "axios";
 import NotificationsPopup from "./NotificationsPopup";
-import { ToastContainer, toast } from "react-toastify";
 import HeaderAvatarLoading from "@/components/effects/HeaderAvatarLoading";
 
 export default function Header({ toggleSidebar }) {
+  const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const avatarRef = useRef(null);
