@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useWebSocket } from "@/components/hooks/WebsocketProvider";
+import formatTime from "@/utils/formatTime";
+import playNotificationSound from "@/utils/playNotificationSound";
 import {
   FiBell,
   FiCheckCircle,
@@ -11,6 +13,7 @@ import {
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactMarkdown from "react-markdown";
+import Cookies from "js-cookie";
 
 const typeStyles = {
   success: "bg-green-600",
@@ -26,57 +29,42 @@ const typeIcons = {
   error: <FiAlertTriangle className="text-red-100" />,
 };
 
-const formatTime = (timestamp) => {
-  if (!timestamp) return "Invalid Date";
-
-  const date = new Date(timestamp);
-  if (isNaN(date.getTime())) return "Invalid Date";
-
-  const now = new Date();
-  const diffInSeconds = Math.floor((now - date) / 1000);
-
-  if (diffInSeconds < 60) {
-    return `${diffInSeconds} sec ago`;
-  }
-
-  const diffInMinutes = Math.floor(diffInSeconds / 60);
-  if (diffInMinutes < 60) {
-    return `${diffInMinutes} min ago`;
-  }
-
-  const diffInHours = Math.floor(diffInMinutes / 60);
-  if (diffInHours < 24) {
-    return `${diffInHours} hour${diffInHours > 1 ? "s" : ""} ago`;
-  }
-
-  return new Intl.DateTimeFormat(navigator.language, {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(date);
-};
-
-const playNotificationSound = () => {
-  const audio = new Audio("/notification.mp3");
-  audio.play();
-};
-
 export default function NotificationsPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const { notifications: wsNotifications } = useWebSocket();
+  const [uid, setUid] = useState(null);
   const toastShown = useRef(false);
   const popupRef = useRef(null);
 
+  // Get user ID from cookies
   useEffect(() => {
+    const interval = setInterval(() => {
+      const userCookie = Cookies.get("user");
+      if (userCookie) {
+        try {
+          const user = JSON.parse(userCookie);
+          if (user?.id) {
+            setUid(user.id);
+          }
+        } catch (error) {
+          console.error("Error parsing user cookie:", error);
+        }
+      }
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (!uid) return;
+
     const fetchNotifications = async () => {
       try {
         const response = await fetch("/api/notifications", {
           headers: {
-            uid: "649452442253000704",
+            uid: uid,
           },
         });
         if (!response.ok) throw new Error("Failed to fetch notifications");
@@ -94,7 +82,7 @@ export default function NotificationsPopup() {
     };
 
     fetchNotifications();
-  }, []);
+  }, [uid]);
 
   useEffect(() => {
     if (wsNotifications.length > 0) {
