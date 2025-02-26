@@ -23,6 +23,27 @@ export default function Callback() {
             sameSite: "Lax",
             secure: false,
           });
+
+          axios
+            .get("/api/discord/users/@me", {
+              headers: { Authorization: access_token },
+            })
+            .then((response) => {
+              const data = {
+                id: response.data.id,
+                username: response.data.username,
+                avatar: response.data.avatar,
+              };
+
+              // Save user data in cache
+              Cookies.set("user", JSON.stringify(data), {
+                expires: 7,
+                secure: false,
+                sameSite: "Strict",
+                path: "/",
+              });
+            });
+
           router.push("/dashboard");
         })
         .catch((error) => {
