@@ -18,7 +18,7 @@ export default async function handler(req, res) {
         .json({ message: "You have to provide an User ID" });
     }
 
-    fetch(`${process.env.API_URL}/notifications/read`, {
+    const response = fetch(`${process.env.API_URL}/notifications/read`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json", uid: uid },
       body: JSON.stringify({ id: nid }),

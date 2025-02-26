@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   try {
     const { uid } = req.headers;
 
-    fetch(`${process.env.API_URL}/notifications`, {
+    const response = fetch(`${process.env.API_URL}/notifications`, {
       method: "GET",
       headers: { "Content-Type": "application/json", uid },
     });
