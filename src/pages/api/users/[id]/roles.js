@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
   try {
     const response = await axios.get(
-      `http://localhost:4000/api/v4/user/profile/${id}`,
+      `${process.env.API_URL}/user/profile/${id}`,
       {
         headers: {
           key: process.env.ACCESS_KEY,

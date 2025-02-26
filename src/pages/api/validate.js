@@ -11,19 +11,17 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Page ID is required" });
   }
 
-  const apiURL = "http://localhost:4000/api/v4";
   const headers = { Key: process.env.ACCESS_KEY };
-
   try {
     let response;
     switch (check) {
       case "status":
-        response = await axios.get(`${apiURL}/pages/${page}/status`, {
+        response = await axios.get(`${process.env.API_URL}/pages/${page}/status`, {
           headers,
         });
         break;
       case "meta":
-        response = await axios.get(`${apiURL}/pages/${page}/meta`, {
+        response = await axios.get(`${process.env.API_URL}/pages/${page}/meta`, {
           headers,
         });
         break;
@@ -34,17 +32,17 @@ export default async function handler(req, res) {
             .json({ error: "Role is required for access check" });
         }
         response = await axios.get(
-          `${apiURL}/pages/${page}/access?role=${role}`,
+          `${process.env.API_URL}/pages/${page}/access?role=${role}`,
           { headers }
         );
         break;
       case "info":
-        response = await axios.get(`${apiURL}/pages/${page}`, {
+        response = await axios.get(`${process.env.API_URL}/pages/${page}`, {
           headers,
         });
         break;
       default:
-        response = await axios.get(`${apiURL}/pages/${page}`, {
+        response = await axios.get(`${process.env.API_URL}/pages/${page}`, {
           headers,
         });
         break;
