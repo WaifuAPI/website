@@ -8,11 +8,11 @@ export default function AuthFailure() {
         Authentication Failed!
       </h1>
       <p className="text-2xl font-semibold mb-2 text-yellow-300">
-        Uh-oh! We couldn't verify your identity. 🚨
+        Uh-oh! We couldn&apos;t verify your identity. 🚨
       </p>
       <p className="text-lg mb-6 mr-2 text-gray-300">
-        Something went wrong, but we're not sure what. 🤔 Try again or contact
-        support if the issue persists.
+        Something went wrong, but we&apos;re not sure what. 🤔 Try again or
+        contact support if the issue persists.
       </p>
       <div className="flex space-x-4">
         <Link

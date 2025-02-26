@@ -21,7 +21,7 @@ export default function AuthLoader() {
         </h1>
       </div>
       <p className="text-xl font-semibold mb-2 text-sky-300">
-        Hold tight, we're checking your credentials! (◕‿◕✿)
+        Hold tight, we&apos;re checking your credentials! (◕‿◕✿)
       </p>
       <p className="text-lg text-gray-300">
         This won&apos;t take long, promise! 🚀
