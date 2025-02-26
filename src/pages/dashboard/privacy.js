@@ -1,10 +1,11 @@
 import { useState } from "react";
+import PageWrapper from "@/components/pages/global/PageWrapper";
 import DashboardSidebar from "@/components/sidebar/Dashboard";
 import Header from "@/components/pages/dashboard/Header";
-import WorkInProgress from "@/components/pages/global/WorkInProgress";
+import WorkInProgress from "@/components/pages/dashboard/WorkInProgress";
 import PrivacyCard from "@/components/pages/dashboard/privacy/Card";
 import SubHeader from "@/components/pages/dashboard/SubHeader";
-import ServiceNotAvailable from "@/components/pages/global/ServiceNotAvailable";
+import ServiceNotAvailable from "@/components/pages/dashboard/ServiceNotAvailable";
 import { ToastContainer } from "react-toastify";
 
 export default function DashboardPrivacy() {
@@ -15,31 +16,33 @@ export default function DashboardPrivacy() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100 overflow-hidden">
-      <ToastContainer />
-      {/* Sidebar */}
-      <DashboardSidebar
-        sidebarOpen={sidebarOpen}
-        toggleSidebar={toggleSidebar}
-      />
-      {/* pass state and toggle function to sidebar */}
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col bg-gray-900">
-        {/* Header */}
-        <Header toggleSidebar={toggleSidebar} />
-
-        <SubHeader
-          breadcrumbs={[
-            { label: "Home", href: "/dashboard" },
-            { label: "Privacy Settings" },
-          ]}
+    <PageWrapper pageName="privacy">
+      <div className="flex h-screen bg-gray-100 overflow-hidden">
+        <ToastContainer />
+        {/* Sidebar */}
+        <DashboardSidebar
+          sidebarOpen={sidebarOpen}
+          toggleSidebar={toggleSidebar}
         />
-        <ServiceNotAvailable />
-        {/* Dashboard Content */}
-        <main className="text-white flex-1 p-8 overflow-auto min-h-[calc(100vh-4rem)] bg-gray-950">
-          <PrivacyCard />
-        </main>
+        {/* pass state and toggle function to sidebar */}
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col bg-gray-900">
+          {/* Header */}
+          <Header toggleSidebar={toggleSidebar} />
+
+          <SubHeader
+            breadcrumbs={[
+              { label: "Home", href: "/dashboard" },
+              { label: "Privacy Settings" },
+            ]}
+          />
+          <ServiceNotAvailable />
+          {/* Dashboard Content */}
+          <main className="text-white flex-1 p-8 overflow-auto min-h-[calc(100vh-4rem)] bg-gray-950">
+            <PrivacyCard />
+          </main>
+        </div>
       </div>
-    </div>
+    </PageWrapper>
   );
 }
