@@ -14,7 +14,7 @@ const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const isDashboardPage = router.pathname.startsWith("/dash");
+  const isDashboardPage = router.pathname.startsWith("/dashboard");
 
   return (
     <QueryClientProvider client={queryClient}>
