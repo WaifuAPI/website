@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { Transition } from "@headlessui/react";
-import { set } from "nprogress";
 
 const premiumButtonTexts = [
   "🌟 Upgrade to Premium!",
@@ -64,13 +63,10 @@ export default function PremiumNavbar() {
         const res = await fetch("/api/validate?page=premium");
         const data = await res.json();
 
-        console.log(data);
-        if (data?.page?.mode?.maintenance?.status) {
+        if (data?.page?.maintenance?.status) {
           setType("maintenance");
-        } else if (data?.page?.access) {
-          setType(data?.page?.type);
         } else {
-          setType("production");
+          setType(data?.page?.type);
         }
       } catch (error) {
         setType("production");
@@ -83,7 +79,6 @@ export default function PremiumNavbar() {
 
   // Determine the label based on the type
   const getLabel = () => {
-    console.log(type);
     switch (type) {
       case "alpha":
         return { text: "ALPHA", color: "border-yellow-500" };
