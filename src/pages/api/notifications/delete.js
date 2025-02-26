@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export default async function handler(req, res) {
   if (req.method !== "DELETE") {
     return res.status(405).json({ message: "Method Not Allowed" });
@@ -13,32 +15,22 @@ export default async function handler(req, res) {
 
     const isGlobal = nid.includes("G");
     if (isGlobal && !uid) {
-      return res
-        .status(401)
-        .json({ message: "You have to provide an User ID" });
+      return res.status(401).json({ message: "You have to provide a User ID" });
     }
 
-    const response = await fetch(
+    const response = await axios.delete(
       `${process.env.API_URL}/notifications/delete`,
       {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json", uid: uid },
-        body: JSON.stringify({ id: nid }),
+        headers: { "Content-Type": "application/json", uid },
+        data: { id: nid }, // `axios.delete` requires `data` for the request body
       }
     );
 
-    if (!response.ok) {
-      const errorData = await response.text();
-      return res
-        .status(response.status)
-        .json({ message: "Error deleting notification", error: errorData });
-    }
-
-    const data = await response.json();
-    res.status(200).json(data);
+    res.status(200).json(response.data);
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Internal Server Error", error: error.message });
+    res.status(error.response?.status || 500).json({
+      message: "Error deleting notification",
+      error: error.response?.data || error.message,
+    });
   }
 }

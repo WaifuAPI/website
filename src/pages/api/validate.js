@@ -16,14 +16,20 @@ export default async function handler(req, res) {
     let response;
     switch (check) {
       case "status":
-        response = await axios.get(`${process.env.API_URL}/pages/${page}/status`, {
-          headers,
-        });
+        response = await axios.get(
+          `${process.env.API_URL}/pages/${page}/status`,
+          {
+            headers,
+          }
+        );
         break;
       case "meta":
-        response = await axios.get(`${process.env.API_URL}/pages/${page}/meta`, {
-          headers,
-        });
+        response = await axios.get(
+          `${process.env.API_URL}/pages/${page}/meta`,
+          {
+            headers,
+          }
+        );
         break;
       case "access":
         if (!role) {
@@ -52,7 +58,6 @@ export default async function handler(req, res) {
       .status(response.status)
       .json({ status: "ok", page: response.data });
   } catch (error) {
-    console.log(error);
     console.log(error.response?.data);
     return res.status(error.response?.status || 500).json({
       error: error.response?.data?.message || "Internal Server Error",
