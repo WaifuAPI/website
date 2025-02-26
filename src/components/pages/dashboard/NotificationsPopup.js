@@ -135,14 +135,40 @@ export default function NotificationsPopup() {
     };
   }, [isOpen]);
 
-  const markAsRead = (id) => {
+  const markAsRead = async (id) => {
     setNotifications((prev) =>
       prev.map((n) => (n._id === id ? { ...n, read: true } : n))
     );
+    try {
+      const response = await fetch("/api/notifications/read", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", uid: uid },
+        body: JSON.stringify({ nid: id }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to mark notification as read");
+      }
+    } catch (error) {
+      console.error("Error marking notification as read:", error);
+    }
   };
 
-  const removeNotification = (id) => {
-    setNotifications(notifications.filter((n) => n._id !== id));
+  const removeNotification = async (id) => {
+    setNotifications((prev) => prev.filter((n) => n._id !== id));
+    try {
+      const response = await fetch("/api/notifications/delete", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json", uid: uid },
+        body: JSON.stringify({ nid: id }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete notification");
+      }
+    } catch (error) {
+      console.error("Error deleting notification:", error);
+    }
   };
 
   return (
