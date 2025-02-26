@@ -1,70 +1,63 @@
-import { access } from "fs";
+import axios from "axios";
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   const { page, role, check } = req.query;
 
-  // Simulated page access rules
-  const pages = {
-    home: {
-      available: true,
-      type: "production", // Options: production, alpha, beta
-      mode: {
-        maintenance: {
-          status: false,
-          message: "Page is under maintenance. Please try again later.",
-        },
-      },
-      permission: {
-        roles: ["admin", "member"],
-      },
-    },
-    dashboard: {
-      available: true,
-      type: "production", // Options: production, alpha, beta
-      mode: {
-        maintenance: {
-          status: false,
-          message: "Page is under maintenance. Please try again later.",
-        },
-      },
-      permission: {
-        roles: ["admin", "member"],
-      },
-    },
-    premium: {
-      access: true,
-      type: "production", // Options: production, alpha, beta
-      mode: {
-        maintenance: {
-          status: false,
-          message: "Page is under maintenance. Please try again later.",
-        },
-      },
-      permission: {
-        roles: ["admin", "member"],
-      },
-    },
-  };
-
-  let response = { status: "ok", page: {} };
-
-  // Page Access Check
-  if (check === "page" || !check) {
-    if (!page || !pages[page]) {
-      response.page = { available: false, reason: "Page not found" };
-    } else {
-      const pageData = pages[page];
-      response.page = pageData;
-      if (role && !pageData.roles.includes(role)) {
-        response.page.access = false;
-        response.page.reason = "Insufficient role permissions";
-      }
-    }
+  if (!page) {
+    return res.status(400).json({ error: "Page ID is required" });
   }
 
-  return res.status(200).json(response);
+  const apiURL = "http://localhost:4000/api/v4";
+  const headers = { Key: process.env.ACCESS_KEY };
+
+  try {
+    let response;
+    switch (check) {
+      case "status":
+        response = await axios.get(`${apiURL}/pages/${page}/status`, {
+          headers,
+        });
+        break;
+      case "meta":
+        response = await axios.get(`${apiURL}/pages/${page}/meta`, {
+          headers,
+        });
+        break;
+      case "access":
+        if (!role) {
+          return res
+            .status(400)
+            .json({ error: "Role is required for access check" });
+        }
+        response = await axios.get(
+          `${apiURL}/pages/${page}/access?role=${role}`,
+          { headers }
+        );
+        break;
+      case "info":
+        response = await axios.get(`${apiURL}/pages/${page}`, {
+          headers,
+        });
+        break;
+      default:
+        response = await axios.get(`${apiURL}/pages/${page}`, {
+          headers,
+        });
+        break;
+    }
+
+    return res
+      .status(response.status)
+      .json({ status: "ok", page: response.data });
+  } catch (error) {
+    console.log(error);
+    console.log(error.response?.data);
+    return res.status(error.response?.status || 500).json({
+      error: error.response?.data?.message || "Internal Server Error",
+    });
+  }
 }
