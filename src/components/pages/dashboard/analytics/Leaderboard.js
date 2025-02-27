@@ -78,7 +78,7 @@ export default function UserStatsLeaderboard() {
           <div className="flex justify-between border-b border-gray-700 pb-2">
             <span className="text-gray-400">Requests</span>
             <span className="font-semibold text-gray-100">
-              {userStats.requests} reqs
+              {userStats.requests}
             </span>
           </div>
 
@@ -102,7 +102,7 @@ export default function UserStatsLeaderboard() {
           <div className="flex justify-between border-b border-gray-700 pb-2">
             <span className="text-gray-400">Quota Used</span>
             <span className="font-semibold text-gray-100">
-              {userStats.quotaUsed}/{userStats.quotaProgress.total} reqs
+              {userStats.quotaUsed}/{userStats.quotaProgress.total}
             </span>
           </div>
 
