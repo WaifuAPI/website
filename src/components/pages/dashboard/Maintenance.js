@@ -13,24 +13,24 @@ export default function Maintenance({ message }) {
       </div>
 
       {/* Small Screen Version */}
-      <div className="flex sm:hidden items-center mb-4">
+      <div className="flex sm:hidden items-center mb-4 mr-8 sm:mr-0">
         <FaTools className="text-orange-500 text-3xl mr-3" />
         <h1 className="text-3xl font-bold text-orange-400">
           Under Maintenance
         </h1>
       </div>
 
-      <p className="text-2xl font-semibold text-orange-300 mb-2">
+      <p className="text-2xl font-semibold text-orange-300 mb-2 mr-2 sm:mr-0">
         Hold tight! We’re working on improvements. 🚧
       </p>
-      <p className="text-lg mb-6 text-gray-300">{message}</p>
-      <p className="text-gray-400 mb-6">
+      <p className="text-lg mb-6 text-gray-300 mr-6 sm:mr-0">{message}</p>
+      <p className="text-gray-400 mb-6 mr-4 sm:mr-0">
         We&apos;ll be back soon! Thanks for your patience. 🔧
       </p>
 
       <Link
         href="/dashboard"
-        className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-full text-lg font-semibold shadow-lg transition duration-300"
+        className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-full text-lg font-semibold shadow-lg transition duration-300 mr-6 sm:mr-0"
       >
         Go Home 🏠
       </Link>

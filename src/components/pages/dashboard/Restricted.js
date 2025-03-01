@@ -11,31 +11,32 @@ export default function Restricted() {
       </div>
 
       {/* Small Screen Version */}
-      <div className="flex sm:hidden items-center mb-4">
+      <div className="flex sm:hidden items-center mb-4 mr-8 sm:mr-0">
         <FaLock className="text-red-600 text-3xl mr-3" />
         <h1 className="text-3xl font-bold text-red-500">Access Denied</h1>
       </div>
 
-      <p className="text-xl sm:text-2xl font-semibold text-red-400 mb-2">
+      <p className="text-xl sm:text-2xl font-semibold text-red-400 mb-2 mr-6 sm:mr-0">
         🚨 STOP! You do not have permission to access this area. 🚨
       </p>
 
-      <p className="text-base sm:text-lg mb-6 text-gray-300">
+      <p className="text-base sm:text-lg mb-6 text-gray-300 mr-4 sm:mr-0">
         You may not have the necessary permissions, or this page might be
         temporarily unavailable.
       </p>
-      <p className="text-sm sm:text-base text-gray-400 mb-6">
+
+      <p className="text-sm sm:text-base text-gray-400 mb-6 mr-4 sm:mr-0">
         If you think this is a mistake, please contact support. 🚧
       </p>
 
       <Link
         href="/dashboard"
-        className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-full text-lg font-semibold shadow-lg transition duration-300"
+        className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-full text-lg font-semibold shadow-lg transition duration-300 mr-4 sm:mr-0"
       >
         Return to Safety 🏠
       </Link>
 
-      <p className="mt-6 text-xs sm:text-sm text-gray-500">
+      <p className="mt-6 text-xs sm:text-sm text-gray-500 mr-4 sm:mr-0">
         You shall not pass... unless you have the right key! 🔑 (¬‿¬)
       </p>
 
