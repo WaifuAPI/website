@@ -7,7 +7,7 @@ export default function Features() {
         <div className="grid lg:grid-cols-2 gap-16">
           <div>
             <h2 className="text-3xl font-bold mb-6">
-              Unlock the world of anime with our comprehensive API.
+              Unlock The World Of Anime With Our Comprehensive API!
             </h2>
             <p className="text-lg mb-8">
               Discover a treasure trove of anime content and enrich your
