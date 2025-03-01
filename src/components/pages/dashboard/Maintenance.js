@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FaTools } from "react-icons/fa"; // Adding a lock icon for restricted access
 
-export default function Maintenance() {
+export default function Maintenance({ message }) {
   return (
     <div className="flex flex-col items-center justify-center text-gray-100 text-center mt-20">
       {/* Large Screen Version */}
@@ -23,9 +23,7 @@ export default function Maintenance() {
       <p className="text-2xl font-semibold text-orange-300 mb-2">
         Hold tight! We’re working on improvements. 🚧
       </p>
-      <p className="text-lg mb-6 text-gray-300">
-        Page is under maintenance. Please try again later.
-      </p>
+      <p className="text-lg mb-6 text-gray-300">{message}</p>
       <p className="text-gray-400 mb-6">
         We&apos;ll be back soon! Thanks for your patience. 🔧
       </p>
