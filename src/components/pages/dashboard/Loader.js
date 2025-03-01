@@ -15,7 +15,7 @@ export default function Loader() {
     //   </div>
     // </div>
 
-    <div className="flex items-center justify-center w-full h-screen bg-gray-900">
+    <div className="flex items-center justify-center text-center mt-20 sm:mt-2 h-screen bg-gray-900">
       <div className="w-full max-w-6xl space-y-6 p-6 animate-pulse">
         {/* Header Placeholder */}
         <div className="h-10 bg-gray-700 rounded w-1/4"></div>
