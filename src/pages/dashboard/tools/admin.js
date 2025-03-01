@@ -1,5 +1,6 @@
 import { useState } from "react"; // import useState to manage state
 import PageWrapper from "@/components/pages/global/PageWrapper";
+import ContentWrapper from "@/components/pages/dashboard/ContentWrapper";
 import DashboardSidebar from "@/components/sidebar/Dashboard";
 import Header from "@/components/pages/dashboard/Header";
 import SubHeader from "@/components/pages/dashboard/SubHeader";
@@ -37,10 +38,10 @@ export default function DashboardAdmin() {
             ]}
           />
 
-          {/* Dashboard Content */}
-          <main className="text-white flex-1 p-8 overflow-auto min-h-[calc(100vh-4rem)] bg-gray-950">
-            <StaffRestricted />
-          </main>
+          <ContentWrapper pageName="admin">
+            {/* Dashboard Content */}
+            <main className="text-white flex-1 p-8 overflow-auto min-h-[calc(100vh-4rem)] bg-gray-950"></main>
+          </ContentWrapper>
         </div>
       </div>
     </PageWrapper>
