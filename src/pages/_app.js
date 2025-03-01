@@ -26,6 +26,7 @@ function MyApp({ Component, pageProps }) {
             name="google-adsense-account"
             content="ca-pub-1733730047414795"
           />
+          <meta name="theme-color" content="#1E293BE6" />
         </Head>
         <Script
           async
