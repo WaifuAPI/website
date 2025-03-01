@@ -25,7 +25,7 @@ export default function HomeHead() {
         property="og:description"
         content="Discover a user-friendly open-source API designed to access a vast collection of 80,000+ anime waifu data and images, alongside a wide range of quotes, facts, and additional endpoints."
       />
-      <meta name="theme-color" content="#1DA1F2" />
+      <meta name="theme-color" content="#111827" />
       <meta
         name="google-adsense-account"
         content="ca-pub-1733730047414795"
