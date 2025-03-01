@@ -92,13 +92,13 @@ export default function ContentWrapper({ pageName, children }) {
   }, [pageName]);
 
   if (loading) return <Loader />;
+  if (!available) return <Restricted message={message} />;
+  if (underMaintenance) return <Maintenance message={message} />;
   if (!allowed) {
     if (restrictionType === "staff") return <StaffRestricted />;
     if (restrictionType === "beta") return <BetaRestricted />;
     return <Restricted />;
   }
-  if (!available) return <Restricted message={message} />;
-  if (underMaintenance) return <Maintenance message={message} />;
 
   if (!serviceNotAvailable) {
     return (
