@@ -5,6 +5,7 @@ import Maintenance from "./Maintenance";
 import Restricted from "./Restricted";
 import StaffRestricted from "./StaffRestricted";
 import BetaRestricted from "./BetaRestricted";
+import ServiceNotAvailable from "./ServiceNotAvailable";
 
 const STAFF_ROLES = [
   "developer",
@@ -20,6 +21,7 @@ const STAFF_ROLES = [
 export default function ContentWrapper({ pageName, children }) {
   const [loading, setLoading] = useState(true);
   const [available, setAvailable] = useState(false);
+  const [serviceNotAvailable, setServiceNotAvailable] = useState(false);
   const [underMaintenance, setUnderMaintenance] = useState(false);
   const [message, setMessage] = useState("");
   const [allowed, setAllowed] = useState(false);
@@ -78,6 +80,7 @@ export default function ContentWrapper({ pageName, children }) {
         } else {
           determineRestriction(requiredRoles);
         }
+        setServiceNotAvailable(data?.page?.content?.service?.available);
       } catch {
         setMessage("Error checking page availability.");
       } finally {
@@ -96,6 +99,15 @@ export default function ContentWrapper({ pageName, children }) {
   }
   if (!available) return <Restricted message={message} />;
   if (underMaintenance) return <Maintenance message={message} />;
+
+  if (!serviceNotAvailable) {
+    return (
+      <>
+        <ServiceNotAvailable />
+        {children}
+      </>
+    );
+  }
 
   return <>{children}</>;
 }
