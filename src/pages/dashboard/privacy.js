@@ -37,7 +37,6 @@ export default function DashboardPrivacy() {
               { label: "Privacy Settings" },
             ]}
           />
-          <ServiceNotAvailable />
           {/* Dashboard Content */}
           <ContentWrapper pageName="privacy">
             <main className="text-white flex-1 p-8 overflow-auto min-h-[calc(100vh-4rem)] bg-gray-950">
