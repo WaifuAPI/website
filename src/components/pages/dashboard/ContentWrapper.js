@@ -6,6 +6,7 @@ import Restricted from "./Restricted";
 import StaffRestricted from "./StaffRestricted";
 import BetaRestricted from "./BetaRestricted";
 import ServiceNotAvailable from "./ServiceNotAvailable";
+import WorkInProgress from "./WorkInProgress";
 
 const STAFF_ROLES = [
   "developer",
@@ -21,6 +22,7 @@ const STAFF_ROLES = [
 export default function ContentWrapper({ pageName, children }) {
   const [loading, setLoading] = useState(true);
   const [available, setAvailable] = useState(false);
+  const [type, setType] = useState("");
   const [serviceNotAvailable, setServiceNotAvailable] = useState(false);
   const [underMaintenance, setUnderMaintenance] = useState(false);
   const [message, setMessage] = useState("");
@@ -80,6 +82,7 @@ export default function ContentWrapper({ pageName, children }) {
         } else {
           determineRestriction(requiredRoles);
         }
+        setType(data.page.content.type);
         setServiceNotAvailable(data?.page?.content?.service?.available);
       } catch {
         setMessage("Error checking page availability.");
@@ -99,6 +102,7 @@ export default function ContentWrapper({ pageName, children }) {
     if (restrictionType === "beta") return <BetaRestricted />;
     return <Restricted />;
   }
+  if (type === "alpha") return <WorkInProgress />;
 
   if (!serviceNotAvailable) {
     return (
