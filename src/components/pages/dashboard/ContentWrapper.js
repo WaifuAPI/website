@@ -24,6 +24,8 @@ export default function ContentWrapper({ pageName, children }) {
   const [available, setAvailable] = useState(false);
   const [type, setType] = useState("");
   const [serviceNotAvailable, setServiceNotAvailable] = useState(false);
+  const [serviceNotAvailableMessage, setServiceNotAvailableMessage] =
+    useState("");
   const [underMaintenance, setUnderMaintenance] = useState(false);
   const [message, setMessage] = useState("");
   const [allowed, setAllowed] = useState(false);
@@ -84,6 +86,7 @@ export default function ContentWrapper({ pageName, children }) {
         }
         setType(data.page.content.type);
         setServiceNotAvailable(data?.page?.content?.service?.available);
+        setServiceNotAvailableMessage(data?.page?.content?.service?.message);
       } catch {
         setMessage("Error checking page availability.");
       } finally {
@@ -107,7 +110,7 @@ export default function ContentWrapper({ pageName, children }) {
   if (!serviceNotAvailable) {
     return (
       <>
-        <ServiceNotAvailable />
+        <ServiceNotAvailable message={serviceNotAvailableMessage} />
         {children}
       </>
     );
