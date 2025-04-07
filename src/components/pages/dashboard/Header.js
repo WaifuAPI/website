@@ -118,6 +118,9 @@ export default function Header({ toggleSidebar }) {
       {/* Header Title with better font style */}
       <h2 className="text-2xl font-semibold tracking-wide text-gray-100 ml-2">
         Dashboard
+        <span className="select-none absolute text-white text-xs font-bold ml-1 px-2 py-0.5 rounded-md border border-sky-700 max-[1219px]:hidden">
+          BETA
+        </span>
       </h2>
 
       {/* Right side with avatar and logout button */}
