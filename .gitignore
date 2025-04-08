@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 package-lock.json
+pnpm-lock.yaml
 
 # testing
 /coverage
@@ -35,3 +36,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+codeforfuture/discorduserfromnextjsapi.js
+codeforfuture/get-session.js
+codeforfuture/handler.js
+src/pages/api/auth/session.js
+src/pages/api/users/@me.js
