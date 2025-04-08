@@ -1,8 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Example: import from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 
 :root {
   --foreground-rgb: 0, 0, 0;
