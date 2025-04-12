@@ -57,7 +57,7 @@ export default async function handler(req, res) {
         grant_type: "authorization_code",
         code,
         redirect_uri: process.env.REDIRECT_URL,
-        scope: "identify%20email%20guilds.members.read%20guilds.join%20guilds",
+        scope: "identify%20email%20guilds.join%20guilds",
       }),
       {
         headers: {
