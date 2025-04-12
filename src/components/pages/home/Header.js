@@ -12,7 +12,7 @@ const getCookie = (name) => {
 // Handling login button click
 const handleLogin = () => {
   const accessToken = getCookie("access_token");
-  const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds.members.read%20guilds.join%20guilds`;
+  const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds.join%20guilds`;
 
   if (!accessToken) {
     window.location.href = oauthUrl;

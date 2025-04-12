@@ -13,7 +13,7 @@ export default function RequireDiscordOAuth({ children }) {
     if (!accessToken) {
       Cookies.remove("user");
       router.push(
-        `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds.members.read%20guilds.join%20guilds`
+        `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds.join%20guilds`
       );
       return;
     }
@@ -27,7 +27,7 @@ export default function RequireDiscordOAuth({ children }) {
         Cookies.remove("access_token");
         Cookies.remove("user");
         router.push(
-          `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds.members.read%20guilds.join%20guilds`
+          `https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds.join%20guilds`
         );
       } finally {
         setLoading(false);
@@ -64,7 +64,7 @@ export default function RequireDiscordOAuth({ children }) {
 
 //         // Redirect to Discord OAuth
 //         router.push(
-//           `https://discord.com/api/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${encodeURIComponent(process.env.NEXT_PUBLIC_REDIRECT_URL)}&response_type=code&scope=identify%20email%20guilds.members.read%20guilds.join%20guilds`
+//           `https://discord.com/api/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${encodeURIComponent(process.env.NEXT_PUBLIC_REDIRECT_URL)}&response_type=code&scope=identify%20email%20guilds.join%20guilds`
 //         );
 //       } finally {
 //         setLoading(false);
