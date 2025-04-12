@@ -146,8 +146,8 @@ export default function PremiumNavbar() {
             href="/premium"
             className="text-gray-900 font-medium px-4 py-2 rounded-md bg-white border border-gray-600 transition duration-300 hover:bg-gray-800 hover:text-white"
           >
-            {/* <span className="text-lg">💎 Unlock Premium!</span> */}
-            <span className="text-lg">{premiumButtonText}</span>
+            <span className="text-lg">💎 Unlock Premium!</span>
+            {/* <span className="text-lg">{premiumButtonText}</span> */}
           </Link>
         </div>
       </div>

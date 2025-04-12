@@ -3,22 +3,6 @@ import { useState, useRef, useEffect } from "react";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { Transition } from "@headlessui/react";
 
-const premiumButtonTexts = [
-  "🌟 Upgrade to Premium!",
-  "🚀 Go Premium Now!",
-  "💎 Unlock Premium!",
-  "🔥 Get Premium Access!",
-  "🎉 Join Premium Today!",
-  "🌟 Level Up with Premium!",
-  "💖 Treat Yourself to Premium!",
-  "🚀 Blast Off with Premium!",
-  "🎁 Exclusive Perks Await!",
-  "⭐ Access Premium Features",
-  "💼 Upgrade More Benefits",
-  "🔓 Unlock Exclusive Features",
-  "🎯 Get Best Experience",
-];
-
 export default function Navbar() {
   const [premiumButtonText, setPremiumButtonText] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +11,22 @@ export default function Navbar() {
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
+
+  const premiumButtonTexts = [
+    "🌟 Upgrade to Premium!",
+    "🚀 Go Premium Now!",
+    "💎 Unlock Premium!",
+    "🔥 Get Premium Access!",
+    "🎉 Join Premium Today!",
+    "🌟 Level Up with Premium!",
+    "💖 Treat Yourself to Premium!",
+    "🚀 Blast Off with Premium!",
+    "🎁 Exclusive Perks Await!",
+    "⭐ Access Premium Features",
+    "💼 Upgrade More Benefits",
+    "🔓 Unlock Exclusive Features",
+    "🎯 Get Best Experience",
+  ];
 
   // Select a random button text on each render
   useEffect(() => {
@@ -77,7 +77,7 @@ export default function Navbar() {
             href="/premium"
             className="text-white font-medium px-4 py-2 rounded-md bg-gray-800 hover:bg-white hover:text-gray-900 transition duration-300 border border-gray-600"
           >
-            <span className="text-lg">{premiumButtonText}</span>
+            <span className="text-lg">🎁 Upgrade to Premium!</span>
           </Link>
         </div>
       </div>
