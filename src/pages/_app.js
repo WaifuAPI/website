@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "react-query";
+import { useEffect } from "react";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "tailwindcss/tailwind.css";
 import "../styles/globals.css";
@@ -15,6 +16,22 @@ const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const isDashboardPage = router.pathname.startsWith("/dashboard");
+
+  useEffect(() => {
+    const warningTitleCSS =
+      "color:red; font-size:60px; font-weight: bold; -webkit-text-stroke: 1px black;";
+    const warningDescCSS = "font-size: 18px;";
+
+    console.log("%cStop!", warningTitleCSS);
+    console.log(
+      '%cThis is a browser feature intended for developers. If someone told you to copy and paste something here to enable a API feature or "hack" someone\'s account, it is a scam and will give them access to your Waifu.it or Discord account.',
+      warningDescCSS
+    );
+    console.log(
+      "%cSee https://en.wikipedia.org/wiki/Self-XSS for more information.",
+      warningDescCSS
+    );
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
