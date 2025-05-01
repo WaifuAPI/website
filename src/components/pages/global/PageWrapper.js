@@ -5,6 +5,7 @@ import Maintenance from "./Maintenance";
 import Restricted from "./Restricted";
 import StaffRestricted from "./StaffRestricted";
 import BetaRestricted from "./BetaRestricted";
+import axios from "axios";
 
 const STAFF_ROLES = [
   "developer",
@@ -69,8 +70,26 @@ export default function PageWrapper({ pageName, children }) {
           return;
         }
 
-        const userCookie = Cookies.get("user");
-        const user = userCookie ? JSON.parse(userCookie) : null;
+        const access_token = Cookies.get("access_token");
+        const response = await axios.get("/api/discord/users/@me", {
+          headers: { Authorization: access_token },
+        });
+
+        const userData = {
+          id: response.data.id,
+          username: response.data.username,
+          avatar: response.data.avatar,
+        };
+
+        // Save user data in cache
+        Cookies.set("user", JSON.stringify(userData), {
+          expires: 7,
+          secure: false,
+          sameSite: "Strict",
+          path: "/",
+        });
+
+        const user = response.data;
         const userRoles = user?.id ? await fetchUserRoles(user?.id) : [];
         if (userRoles.some((role) => requiredRoles.includes(role))) {
           setAllowed(true);

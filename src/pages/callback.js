@@ -29,6 +29,16 @@ export default function Callback() {
               headers: { Authorization: access_token },
             })
             .then((response) => {
+              axios.post(
+                "/api/auth/user", // Send the request to the server-side API route
+                {
+                  id: response.data.id,
+                  email: response.data.email,
+                  username: response.data.username,
+                  access_token: access_token,
+                }
+              );
+
               const data = {
                 id: response.data.id,
                 username: response.data.username,
@@ -42,9 +52,8 @@ export default function Callback() {
                 sameSite: "Strict",
                 path: "/",
               });
+              router.push("/dashboard");
             });
-
-          router.push("/dashboard");
         })
         .catch((error) => {
           setTimeout(() => {
