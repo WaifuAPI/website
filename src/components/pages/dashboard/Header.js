@@ -151,6 +151,7 @@ export default function Header({ toggleSidebar }) {
             GitHub
           </Link>
           <Link
+            target="_blank"
             href="/premium"
             className="text-white font-medium px-4 py-2 rounded-md bg-gray-800 hover:bg-white hover:text-gray-900 transition duration-300 border border-gray-600"
           >
