@@ -30,6 +30,7 @@ const typeIcons = {
 };
 
 export default function NotificationsPopup() {
+  const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
   const [notifications, setNotifications] = useState([]);
@@ -61,6 +62,7 @@ export default function NotificationsPopup() {
     if (!uid) return;
 
     const fetchNotifications = async () => {
+      setLoading(true); // Start loading
       try {
         const response = await fetch("/api/notifications", {
           headers: {
@@ -78,6 +80,8 @@ export default function NotificationsPopup() {
         setNotifications(validNotifications);
       } catch (error) {
         console.error("Error fetching notifications:", error);
+      } finally {
+        setLoading(false); // Done loading
       }
     };
 
@@ -204,7 +208,14 @@ export default function NotificationsPopup() {
           </div>
 
           <div className="mt-3 max-h-60 overflow-y-auto">
-            {notifications.length === 0 ? (
+            {loading ? (
+              <div className="flex justify-center items-center py-6">
+                <div className="w-5 h-5 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+                {/* <span className="ml-2 text-gray-400 text-sm">
+                  Loading notifications...
+                </span> */}
+              </div>
+            ) : notifications.length === 0 ? (
               <p className="text-gray-400 text-center">No new notifications</p>
             ) : (
               <ul>
