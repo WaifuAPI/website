@@ -118,7 +118,7 @@ export default function Header({ toggleSidebar }) {
       {/* Header Title with better font style */}
       <h2 className="text-2xl font-semibold tracking-wide text-gray-100 ml-2">
         Dashboard
-        <span className="select-none absolute text-white text-xs font-bold ml-1 px-2 py-0.5 rounded-md border border-sky-700 max-[1219px]:hidden">
+        <span className="select-none absolute text-white text-xs font-bold ml-1 px-2 py-0.5 rounded-md border border-sky-700 hover:shadow-[0_0_12px_4px_rgba(56,189,248,0.5)] transition-shadow duration-500 ease-in-out max-[1219px]:hidden">
           BETA
         </span>
       </h2>
