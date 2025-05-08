@@ -19,8 +19,11 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ roles: response.data.roles });
   } catch (error) {
-    console.log(error);
-    console.log(error.response?.data);
+    console.log(
+      `${error.response?.data?.message || "Internal Server Error"} (${
+        error.config?.url || "Unknown URL"
+      })`
+    );
     return res.status(error.response?.status || 500).json({
       error: error.response?.data?.message || "Internal Server Error",
     });
