@@ -81,13 +81,25 @@ export default function PremiumNavbar() {
   const getLabel = () => {
     switch (type) {
       case "alpha":
-        return { text: "ALPHA", color: "border-yellow-500" };
+        return {
+          text: "ALPHA",
+          color:
+            "border-yellow-500 hover:shadow-[0_0_12px_4px_rgba(234,179,8,0.5)] transition-shadow duration-500 ease-in-out max-[1219px]:hidden",
+        };
       case "beta":
-        return { text: "BETA", color: "border-sky-700" };
+        return {
+          text: "BETA",
+          color:
+            "border-sky-700 hover:shadow-[0_0_12px_4px_rgba(56,189,248,0.5)] transition-shadow duration-500 ease-in-out max-[1219px]:hidden",
+        };
       case "production":
         return null;
       case "maintenance":
-        return { text: "MAINTENANCE", color: "border-red-500" };
+        return {
+          text: "MAINTENANCE",
+          color:
+            "border-red-500 hover:shadow-[0_0_12px_4px_rgba(239,68,68,0.5)] transition-shadow duration-500 ease-in-out max-[1219px]:hidden",
+        };
     }
   };
 
@@ -100,7 +112,7 @@ export default function PremiumNavbar() {
           Waifu.it
           {label && (
             <span
-              className={`absolute text-white text-xs font-bold ml-1 px-2 py-0.5 rounded-md border ${label.color}`}
+              className={`select-none absolute text-white text-xs font-bold ml-1 px-2 py-0.5 rounded-md border ${label.color}`}
             >
               {label.text}
             </span>
