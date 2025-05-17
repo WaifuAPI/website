@@ -66,7 +66,7 @@ export default function DashboardSidebar({ sidebarOpen, toggleSidebar }) {
 
       {/* Sidebar */}
       <aside
-        className={`bg-gray-800 text-white w-64 py-7 px-5 fixed lg:relative inset-y-0 left-0 transform transition-transform duration-300 ease-out z-50 shadow-lg overflow-hidden
+        className={`select-none bg-gray-800 text-white w-64 py-7 px-5 fixed lg:relative inset-y-0 left-0 transform transition-transform duration-300 ease-out z-50 shadow-lg overflow-hidden
   ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
       >
         {/* Sidebar Header */}

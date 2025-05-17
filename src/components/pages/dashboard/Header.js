@@ -116,7 +116,7 @@ export default function Header({ toggleSidebar }) {
       </button>
 
       {/* Header Title with better font style */}
-      <h2 className="text-2xl font-semibold tracking-wide text-gray-100 ml-2">
+      <h2 className="select-none text-2xl font-semibold tracking-wide text-gray-100 ml-2">
         Dashboard
         <span className="select-none absolute text-white text-xs font-bold ml-1 px-2 py-0.5 rounded-md border border-sky-700 hover:shadow-[0_0_12px_4px_rgba(56,189,248,0.5)] transition-shadow duration-500 ease-in-out max-[1219px]:hidden">
           BETA
@@ -124,7 +124,7 @@ export default function Header({ toggleSidebar }) {
       </h2>
 
       {/* Right side with avatar and logout button */}
-      <div className="flex items-center space-x-4 lg:mr-2 relative">
+      <div className="select-none flex items-center space-x-4 lg:mr-2 relative">
         <div className="hidden lg:flex lg:items-center lg:space-x-6">
           <Link href="/" className="text-white hover:text-gray-300">
             Home

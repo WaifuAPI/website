@@ -207,7 +207,7 @@ export default function ProfileCard() {
                     alt={user.username}
                     width={80} // Specify the width (adjust as needed)
                     height={80} // Specify the height (adjust as needed)
-                    className="w-20 h-20 rounded-full border-2 border-gray-600 mt-4 sm:mt-0"
+                    className="select-none w-20 h-20 rounded-full border-2 border-gray-600 mt-4 sm:mt-0"
                   />
                 </div>
               </div>
@@ -226,7 +226,7 @@ export default function ProfileCard() {
                   alt={user.username}
                   width={80} // Width in pixels
                   height={80} // Height in pixels
-                  className="w-20 h-20 rounded-full border-2 border-gray-600"
+                  className="select-none w-20 h-20 rounded-full border-2 border-gray-600"
                 />
               </div>
               {/* Username */}
