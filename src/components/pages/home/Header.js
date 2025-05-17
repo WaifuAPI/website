@@ -32,7 +32,7 @@ export default function Header() {
     setHoveredButton(null);
   };
 
-  const introText = useTypewriter("Anime Magic with Waifu.it!", 150, 75, 1000); // Typing, erasing & delay
+  const introText = useTypewriter("Waifu.it!", 250, 75, 1000); // Typing, erasing & delay
 
   return (
     <header className="bg-gray-900 py-16">
@@ -41,13 +41,14 @@ export default function Header() {
           <div className="mb-10 lg:mb-0 lg:max-w-xl lg:text-left text-white">
             {/* Visible on small screens (sm and below), hidden on larger screens */}
             <h1 className="block sm:hidden text-3xl font-bold mb-4 leading-tight">
-              🌟 Unleash{" "}
-              <span className="text-blue-300">Anime Magic with Waifu.it!</span>
+              🌟 Unleash Anime Magic with{" "}
+              <span className="text-blue-300">Waifu.it!</span>
             </h1>
 
             {/* Hidden on small screens, visible on larger screens (sm and above) */}
             <h1 className="hidden sm:block text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-              🌟 Unleash <span className="text-blue-300">{introText}</span>
+              🌟 Unleash Anime Magic with{" "}
+              <span className="text-blue-300">{introText}</span>
             </h1>
             <p className="text-lg text-gray-300 mb-6">
               🚀 Your ultimate source for anime data and insights. Empowering
