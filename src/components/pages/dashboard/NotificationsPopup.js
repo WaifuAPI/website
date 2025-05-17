@@ -36,7 +36,6 @@ export default function NotificationsPopup() {
   const [notifications, setNotifications] = useState([]);
   const { notifications: wsNotifications } = useWebSocket();
   const [uid, setUid] = useState(null);
-  const toastShown = useRef(false);
   const popupRef = useRef(null);
 
   // Get user ID from cookies
@@ -103,7 +102,9 @@ export default function NotificationsPopup() {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   useEffect(() => {
-    if (unreadCount > 0 && !toastShown.current) {
+    const toastAlreadyShown = sessionStorage.getItem("toastShown");
+
+    if (unreadCount > 0 && toastAlreadyShown !== "true") {
       playNotificationSound();
       toast.info(
         `You have ${unreadCount} unread notification${
@@ -115,7 +116,7 @@ export default function NotificationsPopup() {
           theme: "dark",
         }
       );
-      toastShown.current = true;
+      sessionStorage.setItem("toastShown", "true");
     }
   }, [unreadCount]);
 
