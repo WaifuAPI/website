@@ -102,6 +102,7 @@ export default function Header({ toggleSidebar }) {
   const handleLogout = () => {
     Cookies.remove("access_token");
     Cookies.remove("user");
+    sessionStorage.removeItem("toastShown");
     router.push("/");
   };
 
