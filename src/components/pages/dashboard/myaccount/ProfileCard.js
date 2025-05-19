@@ -81,9 +81,80 @@ export default function ProfileCard() {
     };
   }, []); // Empty dependency array to run only once on mount
 
+  const RATE_LIMIT_DECAY_WINDOW = 30 * 24 * 60 * 60 * 1000; // 30 days
+
+  const BASE_WINDOWS = [
+    30 * 1000, // 30 sec
+    60 * 1000, // 1 min
+    5 * 60 * 1000, // 5 min
+    30 * 60 * 1000, // 30 min
+    60 * 60 * 1000, // 1 hr
+    24 * 60 * 60 * 1000, // 1 day
+    48 * 60 * 60 * 1000, // 2 days
+    72 * 60 * 60 * 1000, // 3 days
+    7 * 24 * 60 * 60 * 1000, // 7 days
+  ];
+
+  // Helpers
+  const encode = (obj) => btoa(JSON.stringify(obj));
+  const decode = (str) => {
+    try {
+      return JSON.parse(atob(str));
+    } catch {
+      return null;
+    }
+  };
+
+  function getCooldownDuration(count) {
+    const cooldownIndex = count - 3; // Cooldowns start from 3rd attempt
+    if (cooldownIndex < 0) return 0; // No cooldown for 1st and 2nd
+
+    const maxIndex = BASE_WINDOWS.length - 1;
+    if (cooldownIndex <= maxIndex + 1) return BASE_WINDOWS[cooldownIndex];
+    return BASE_WINDOWS[maxIndex] * Math.pow(2, count - maxIndex - 1); // exponential growth
+  }
+
+  function formatMs(ms) {
+    const seconds = Math.ceil(ms / 1000);
+    if (seconds < 60) return `${seconds} sec`;
+    if (seconds < 3600) return `${Math.ceil(seconds / 60)} min`;
+    if (seconds < 86400) return `${(seconds / 3600).toFixed(1)} hr`;
+    return `${(seconds / 86400).toFixed(1)} day${
+      seconds / 86400 >= 2 ? "s" : ""
+    }`;
+  }
+
   const handleRegenerateClick = async () => {
     setIsRegenerating(true);
     toast.dismiss();
+
+    const now = Date.now();
+    const stored = decode(localStorage.getItem("__rlid"));
+    const count = stored ? stored.count : 0;
+    const last = stored ? stored.timestamp : 0;
+    const cooldown = getCooldownDuration(count);
+
+    // Decay logic: reset count if no regeneration for 30 days
+    const shouldDecay = stored && now - last > RATE_LIMIT_DECAY_WINDOW;
+    const effectiveCount = shouldDecay ? 0 : count;
+
+    const effectiveCooldown = getCooldownDuration(effectiveCount);
+    const remaining = effectiveCooldown - (now - last);
+
+    if (stored && remaining > 0) {
+      toast.error(
+        `You've hit the rate limit. Please wait ${formatMs(
+          remaining
+        )} before regenerating again.`,
+        { position: "bottom-right", autoClose: 4000, theme: "dark" }
+      );
+      setIsRegenerating(false);
+      return;
+    }
+
+    // Save updated count and timestamp
+    const newCount = effectiveCount + 1;
+    localStorage.setItem("__rlid", encode({ count: newCount, timestamp: now }));
 
     const accessToken = Cookies.get("access_token");
     if (!accessToken) {
@@ -354,6 +425,7 @@ export default function ProfileCard() {
                       </button>
                       <button
                         onClick={handleRegenerateClick}
+                        disabled={isRegenerating}
                         className={`mt-2 text-gray-400 hover:text-gray-200 transition-transform ${
                           isRegenerating ? "animate-spin" : ""
                         }`}
@@ -378,6 +450,7 @@ export default function ProfileCard() {
                     </button>
                     <button
                       onClick={handleRegenerateClick}
+                      disabled={isRegenerating}
                       className={`text-gray-400 hover:text-gray-200 transition-transform ${
                         isRegenerating ? "animate-spin" : ""
                       }`}
