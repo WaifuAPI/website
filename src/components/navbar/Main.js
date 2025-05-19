@@ -28,12 +28,12 @@ export default function Navbar() {
     "🎯 Get Best Experience",
   ];
 
-  // Select a random button text on each render
-  useEffect(() => {
-    setPremiumButtonText(
-      premiumButtonTexts[Math.floor(Math.random() * premiumButtonTexts.length)]
-    );
-  }, []);
+  //
+  // useEffect(() => {
+  //   setPremiumButtonText(
+  //     premiumButtonTexts[Math.floor(Math.random() * premiumButtonTexts.length)]
+  //   );
+  // }, []);
 
   return (
     <nav className="bg-gray-900 relative">
@@ -124,8 +124,8 @@ export default function Navbar() {
                 href="/premium"
                 className="inline-flex items-center gap-2 text-white font-semibold px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-600 transition duration-300"
               >
-                {/* <span className="text-lg">💎 Unlock Premium!</span> */}
-                <span className="text-lg">{premiumButtonText}</span>
+                <span className="text-lg">💖 Treat Yourself to Premium!</span>
+                {/* <span className="text-lg">{premiumButtonText}</span> */}
               </Link>
             </div>
           </div>

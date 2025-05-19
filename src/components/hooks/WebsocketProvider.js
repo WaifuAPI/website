@@ -75,6 +75,7 @@ export const WebSocketProvider = ({ children }) => {
   };
 
   // Establish WebSocket connection
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (uid) {
       connectWebSocket();
