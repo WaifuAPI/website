@@ -3,7 +3,7 @@ import { FaLock } from "react-icons/fa"; // Adding a lock icon for restricted ac
 
 export default function StaffRestricted() {
   return (
-    <div className="flex flex-col items-center justify-center text-gray-100 text-center mt-20">
+    <div className="flex flex-col items-center justify-center text-gray-100 text-center mt-28">
       <div className="flex items-center mb-4">
         <FaLock className="text-red-500 text-6xl mr-3" />
         <h1 className="text-5xl font-bold text-yellow-400">Staff Only</h1>

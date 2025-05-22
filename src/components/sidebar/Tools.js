@@ -8,6 +8,8 @@ import {
   FiUser,
   FiKey,
 } from "react-icons/fi";
+import { AiOutlineNotification } from "react-icons/ai";
+import { LuBookmark } from "react-icons/lu";
 import { TbDatabasePlus } from "react-icons/tb";
 import { TfiDashboard } from "react-icons/tfi";
 import { PiCatLight } from "react-icons/pi";
@@ -22,35 +24,33 @@ const overviewLinks = [
     new: true,
   }, // Add 'new' flag here
   { href: "/dashboard/analytics", label: "Analytics", icon: FiBarChart },
+];
+
+const moderationLinks = [
+  { href: "/dashboard/tools/users", label: "Users", icon: FiUsers },
+
   {
-    href: "/dashboard/infractions",
-    label: "Infraction History",
-    icon: FiAlertTriangle,
+    href: "/dashboard/tools/logs",
+    label: "Logs",
+    icon: LuBookmark,
+  },
+  {
+    href: "/dashboard/tools/notifications",
+    label: "Notifications",
+    icon: AiOutlineNotification,
   },
 ];
 
-const managementLinks = [
-  { href: "/dashboard/tools/users", label: "Users", icon: FiUsers },
+const adminLinks = [
+  { href: "/dashboard/tools/admin", label: "Admin", icon: FiKey }, // Add 'new' flag here
   {
     href: "/dashboard/tools/database",
     label: "Database",
     icon: TbDatabasePlus,
   },
-  { href: "/dashboard/tools/admin", label: "Admin", icon: FiKey }, // Add 'new' flag here
 ];
 
-const settingsLinks = [
-  {
-    href: "/dashboard/profile/overview",
-    highlight: "/dashboard/profile/*",
-    label: "My Account",
-    icon: FiUser,
-    new: true,
-  },
-  { href: "/dashboard/privacy", label: "Privacy", icon: FiLock },
-];
-
-export default function DashboardSidebar({ sidebarOpen, toggleSidebar }) {
+export default function ToolsSidebar({ sidebarOpen, toggleSidebar }) {
   // const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
 
@@ -118,11 +118,11 @@ export default function DashboardSidebar({ sidebarOpen, toggleSidebar }) {
               </div>
             </div>
 
-            {/* Settings Section */}
+            {/* Management Section */}
             <div>
-              <h2 className="text-gray-400 font-semibold mb-2">Settings</h2>
+              <h2 className="text-gray-400 font-semibold mb-2">Moderation</h2>
               <div className="space-y-2">
-                {settingsLinks.map(
+                {moderationLinks.map(
                   ({ href, highlight, label, icon: Icon, new: isNew }) => {
                     const pattern = new RegExp(
                       `^${(highlight || href).replace("/*", "/.*")}$`
@@ -155,11 +155,13 @@ export default function DashboardSidebar({ sidebarOpen, toggleSidebar }) {
               </div>
             </div>
 
-            {/* Management Section */}
-            {/* <div>
-              <h2 className="text-gray-400 font-semibold mb-2">Management</h2>
+            {/* Settings Section */}
+            <div>
+              <h2 className="text-gray-400 font-semibold mb-2">
+                Admin & System Control
+              </h2>
               <div className="space-y-2">
-                {managementLinks.map(
+                {adminLinks.map(
                   ({ href, highlight, label, icon: Icon, new: isNew }) => {
                     const pattern = new RegExp(
                       `^${(highlight || href).replace("/*", "/.*")}$`
@@ -190,7 +192,7 @@ export default function DashboardSidebar({ sidebarOpen, toggleSidebar }) {
                   }
                 )}
               </div>
-            </div> */}
+            </div>
           </nav>
         </div>
       </aside>
