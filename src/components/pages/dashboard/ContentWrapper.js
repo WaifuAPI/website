@@ -54,7 +54,7 @@ export default function ContentWrapper({ pageName, children }) {
       try {
         const res = await fetch(`/api/validate?page=${pageName}`);
         const data = await res.json();
-        if (!data?.status === "ok" || !data?.page.content.available) {
+        if (data?.status !== "ok" || !data?.page.content.available) {
           setMessage("This page is currently not available to the public.");
           return;
         }
