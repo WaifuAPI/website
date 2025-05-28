@@ -5,8 +5,9 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LoadingSpinner from "./components/LoadingSpinner";
+import LoadingSpinner from "../../components/ui/LoadingSpinner";
 import { FaSun, FaMoon, FaSignOutAlt } from "react-icons/fa";
+import Footer from "../../components/footer/Main";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -238,7 +239,7 @@ const Dashboard = () => {
 
   return (
     <div
-      className={`min-h-screen ${
+      className={`flex flex-col min-h-screen ${
         theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
       }`}
     >
@@ -256,7 +257,7 @@ const Dashboard = () => {
               theme === "dark"
                 ? "from-gray-800 to-gray-700"
                 : "from-blue-500 to-blue-400"
-            } text-white p-4 font-sans`}
+            } text-white p-4 font-sans `}
           >
             <nav className="max-w-screen-lg mx-auto flex flex-col md:flex-row items-center justify-between">
               <div className="text-white font-extrabold text-3xl mb-4 md:mb-0">
@@ -298,7 +299,7 @@ const Dashboard = () => {
             </nav>
           </div>
 
-          <div className="py-8">
+          <div className="py-8 flex-grow">
             <div className="max-w-screen-lg mx-auto px-4">
               {randomToken && (
                 <div
@@ -360,6 +361,9 @@ const Dashboard = () => {
           </button>
         </>
       )}
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

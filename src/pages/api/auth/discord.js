@@ -57,7 +57,7 @@ export default async function handler(req, res) {
         grant_type: "authorization_code",
         code,
         redirect_uri: process.env.REDIRECT_URL,
-        scope: "identify%20email%20guilds.members.read%20guilds.join%20guilds",
+        scope: "identify%20email%20guilds.join%20guilds",
       }),
       {
         headers: {
@@ -65,11 +65,12 @@ export default async function handler(req, res) {
         },
       }
     );
-    const accessToken = response.data.access_token;
 
-    await checkGuildMembership(accessToken);
+    const { access_token } = response.data;
 
-    return res.status(200).json({ access_token: accessToken });
+    await checkGuildMembership(access_token);
+
+    return res.status(200).json({ access_token: access_token });
   } catch (error) {
     console.error("Authentication Error", error);
     res.status(500).json({ error: "An error occurred during authentication." });

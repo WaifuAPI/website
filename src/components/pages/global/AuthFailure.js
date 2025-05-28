@@ -1,0 +1,50 @@
+import Link from "next/link";
+import { FaExclamationTriangle } from "react-icons/fa"; // Adding an error icon for authentication failure
+
+export default function AuthFailure() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-center">
+      <h1 className="text-3xl font-bold mb-4 text-red-500">
+        Authentication Failed!
+      </h1>
+      <p className="text-2xl font-semibold mb-2 text-yellow-300">
+        Uh-oh! We couldn&apos;t verify your identity. 🚨
+      </p>
+      <p className="text-lg mb-6 mr-2 text-gray-300">
+        Something went wrong, but we&apos;re not sure what. 🤔 Try again or
+        contact support if the issue persists.
+      </p>
+      <div className="flex space-x-4">
+        <Link
+          href="/dashboard"
+          className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-full text-lg font-semibold shadow-lg transition duration-300"
+        >
+          Re-authenticate 🔄
+        </Link>
+        <Link
+          href="/"
+          className="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-full text-lg font-semibold shadow-lg transition duration-300"
+        >
+          Home 🏠
+        </Link>
+      </div>
+
+      <p className="mt-6 text-sm  text-gray-400">
+        Need help?{" "}
+        <Link
+          href="https://discord.gg/yyW389c"
+          className="text-blue-400 hover:underline"
+        >
+          Contact support
+        </Link>{" "}
+        via Discord before the system locks you out! ⏳
+      </p>
+      {/* Apply the cursor dynamically */}
+      <style jsx global>{`
+        body {
+          cursor: url("/cursors/foo603.cur"), auto;
+        }
+      `}</style>
+    </div>
+  );
+}

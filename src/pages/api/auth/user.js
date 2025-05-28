@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default async function handler(req, res) {
   const { method, body } = req;
-  const { id, email, token, access_token } = body;
+  const { id, email, username, token, access_token } = body;
   const apiKey = process.env.ACCESS_KEY;
 
   if (method !== "POST") {
@@ -23,6 +23,7 @@ export default async function handler(req, res) {
         {
           id,
           email,
+          username,
           "access-token": access_token,
         },
         { headers: { key: apiKey } }

@@ -1,8 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Example: import from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -81,20 +80,48 @@ body {
 }
 
 /* styles/globals.css */
+/* Custom Scrollbar Styles */
 ::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  width: 3px; /* width of the scrollbar */
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-radius: 4px;
+  background-color: #38BDF8; /* Custom thumb color */
+  border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+::-webkit-scrollbar-track {
+  background-color: #374151; /* Custom track color */
+  border-radius: 10px;
 }
 
+/* Add this to your global CSS file */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+#nprogress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 1; /* Keep it in layout */
+  transition: opacity 0.5s ease-out;
+}
+
+#nprogress .bar {
+  background: #29d; /* Keep color */
+}
+
+#nprogress[style*="display: none"] {
+  display: block !important;
+  opacity: 0; /* Fade out instead of disappearing */
+}
