@@ -34,7 +34,7 @@ export const WebSocketProvider = ({ children }) => {
   const connectWebSocket = () => {
     if (!uid) return;
 
-    const ws = new WebSocket(`wss://beta.waifu.it/ws?uid=${uid}`);
+    const ws = new WebSocket(`wss://waifu.it/ws?uid=${uid}`);
 
     ws.onopen = () => {
       //  console.log("Connected!");
